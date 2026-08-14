@@ -17,16 +17,17 @@ Motif: **DATA + EDITORIAL + PRODUCT + PERSONAL BRAND**
 
 | Token idea | Choice |
 |------------|--------|
-| Background | Cool paper `#F3F5F4` with subtle grid veil |
-| Foreground | Deep ink `#141816` |
-| Accent | Teal `#0D5C63` (single recognizable accent) |
+| Background | Near-black navy `#070B12` with cyan ambient glow |
+| Foreground | Off-white `#EEF3F7` |
+| Accent | Restrained cyan/teal `#3DB8C5` |
+| Secondary accent | Soft violet for portrait easter-egg only |
 | Display type | Newsreader |
 | Body type | Source Sans 3 |
 | Mono / meta | IBM Plex Mono |
 
-Avoided: purple gradients, glassmorphism, oversized rounded SaaS cards, skill bars, glow effects, generic centered card grids.
+Hero portrait: professional default with cut-out integration; Gojo revealed on desktop hover / mobile tap. Alignment reference composite is **not** rendered as the hero.
 
-Identity signals: editorial labels, project numbering, technical metadata, framed previews (or intentional “visual pending” fallbacks), restrained borders, controlled asymmetry on the homepage.
+Avoided: purple SaaS gradients, glassmorphism, oversized rounded cards, skill bars, glow-everywhere UI, anime-themed chrome outside the portrait easter egg.
 
 ## Typography scale
 

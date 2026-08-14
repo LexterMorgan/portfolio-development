@@ -1,14 +1,16 @@
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.7fr);
-  gap: var(--space-7);
-  align-items: end;
-  padding-block: var(--space-6) var(--space-8);
+  grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  min-height: min(78vh, 46rem);
+  padding-block: var(--space-5) var(--space-8);
 }
 
 .copy {
   display: grid;
   gap: var(--space-4);
+  max-width: 38rem;
 }
 
 .eyebrow {
@@ -27,11 +29,12 @@
 
 .title {
   font-size: var(--text-display);
-  max-width: 14ch;
+  max-width: 13ch;
+  text-wrap: balance;
 }
 
 .lede {
-  max-width: 38rem;
+  max-width: 34rem;
   color: var(--color-fg-muted);
   font-size: 1.08rem;
 }
@@ -43,43 +46,58 @@
   margin-top: var(--space-2);
 }
 
-.panel {
-  display: grid;
-  gap: var(--space-3);
-  padding: var(--space-5);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-frame);
-}
-
-.panelLabel {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-accent);
-}
-
-.panelList {
+.meta {
   list-style: none;
-  display: grid;
-  gap: 0.55rem;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-}
-
-.panelNote {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
   font-size: var(--text-meta);
   color: var(--color-fg-subtle);
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-3);
+}
+
+.meta li {
+  position: relative;
+}
+
+.meta li:not(:last-child)::after {
+  content: "·";
+  margin-left: 1rem;
+  color: var(--color-border-strong);
+}
+
+.portraitWrap {
+  display: grid;
+  justify-items: center;
+  align-items: end;
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    min-height: auto;
+    gap: var(--space-6);
+  }
+
+  .title {
+    max-width: 16ch;
+  }
 }
 
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
-    gap: var(--space-5);
     padding-block: var(--space-4) var(--space-6);
+  }
+
+  .copy {
+    max-width: none;
+    order: 1;
+  }
+
+  .portraitWrap {
+    order: 2;
   }
 
   .title {

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { HeroPortrait } from "@/components/sections/HeroPortrait";
 import styles from "./HeroSection.module.css";
 
 type HeroSectionProps = {
@@ -43,21 +44,17 @@ export function HeroSection({ headline, name, body, links }: HeroSectionProps) {
             </Button>
           ) : null}
         </div>
-      </div>
-
-      <aside className={styles.panel} aria-label="Positioning summary">
-        <p className={styles.panelLabel}>Focus</p>
-        <ul className={styles.panelList}>
+        <ul className={styles.meta}>
           <li>Data Analytics</li>
           <li>Business Intelligence</li>
           <li>SQL / PostgreSQL</li>
           <li>Python workflows</li>
-          <li>Dashboard products</li>
         </ul>
-        <p className={styles.panelNote}>
-          Claims stay traceable to source material. Unknowns remain unresolved.
-        </p>
-      </aside>
+      </div>
+
+      <div className={styles.portraitWrap}>
+        <HeroPortrait />
+      </div>
     </div>
   );
 }

@@ -1,35 +1,39 @@
 /**
- * Design tokens — source of truth for the Phase 2 visual system.
+ * Design tokens — dark cinematic editorial system.
  * Prefer these CSS custom properties over hardcoded values in components.
  */
 
 :root {
-  /* Color — cool analytical paper, deep ink, single teal accent */
-  --color-bg: #f3f5f4;
-  --color-bg-elevated: #eef1ef;
-  --color-fg: #141816;
-  --color-fg-muted: #4a524d;
-  --color-fg-subtle: #6b746e;
-  --color-border: #d5dbd7;
-  --color-border-strong: #b8c0bb;
-  --color-accent: #0d5c63;
-  --color-accent-hover: #0a4a50;
-  --color-accent-soft: rgba(13, 92, 99, 0.08);
-  --color-accent-secondary: #2f4a3c;
-  --color-surface: #ffffff;
-  --color-surface-hover: #f7f9f8;
-  --color-success: #1f6b45;
-  --color-warning: #8a5a12;
-  --color-danger: #8f2f2f;
-  --color-focus: #0d5c63;
-  --color-overlay: rgba(20, 24, 22, 0.45);
+  /* Color — near-black navy, off-white type, restrained cyan/teal */
+  --color-bg: #070b12;
+  --color-bg-elevated: #0c121b;
+  --color-fg: #eef3f7;
+  --color-fg-muted: #9aa7b5;
+  --color-fg-subtle: #6d7b8c;
+  --color-border: rgba(154, 175, 196, 0.14);
+  --color-border-strong: rgba(154, 175, 196, 0.28);
+  --color-accent: #3db8c5;
+  --color-accent-hover: #5ccbd5;
+  --color-accent-soft: rgba(61, 184, 197, 0.12);
+  --color-accent-secondary: #7b6cff;
+  --color-surface: #0f1622;
+  --color-surface-hover: #141d2b;
+  --color-success: #3dba7a;
+  --color-warning: #d4a017;
+  --color-danger: #e25b5b;
+  --color-focus: #5ccbd5;
+  --color-overlay: rgba(3, 6, 12, 0.72);
+  --color-button-primary-bg: #eef3f7;
+  --color-button-primary-fg: #070b12;
+  --color-glow: rgba(61, 184, 197, 0.22);
+  --color-glow-alt: rgba(123, 108, 255, 0.2);
 
   /* Typography */
   --font-display: var(--font-display-family), "Times New Roman", serif;
   --font-body: var(--font-body-family), "Helvetica Neue", sans-serif;
   --font-mono: var(--font-mono-family), ui-monospace, monospace;
 
-  --text-display: clamp(2.5rem, 5vw, 3.75rem);
+  --text-display: clamp(2.5rem, 5.2vw, 4rem);
   --text-page: clamp(2rem, 3.5vw, 2.75rem);
   --text-section: clamp(1.35rem, 2vw, 1.75rem);
   --text-title: 1.25rem;
@@ -39,10 +43,10 @@
   --text-label: 0.75rem;
   --text-code: 0.875rem;
 
-  --leading-tight: 1.15;
+  --leading-tight: 1.12;
   --leading-snug: 1.35;
   --leading-body: 1.65;
-  --tracking-display: -0.02em;
+  --tracking-display: -0.025em;
   --tracking-label: 0.08em;
 
   /* Spacing scale */
@@ -72,9 +76,10 @@
   --duration-fast: 150ms;
   --duration-base: 250ms;
   --duration-slow: 450ms;
+  --duration-portrait: 480ms;
 
-  /* Shadows — restrained */
-  --shadow-frame: 0 1px 0 rgba(20, 24, 22, 0.04), 0 8px 24px rgba(20, 24, 22, 0.04);
+  /* Shadows — restrained cinematic depth */
+  --shadow-frame: 0 1px 0 rgba(255, 255, 255, 0.03), 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -82,5 +87,6 @@
     --duration-fast: 0ms;
     --duration-base: 0ms;
     --duration-slow: 0ms;
+    --duration-portrait: 180ms;
   }
 }

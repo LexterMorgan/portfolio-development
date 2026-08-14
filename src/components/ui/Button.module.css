@@ -11,6 +11,7 @@
     background-color var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
     transform var(--duration-fast) var(--ease-out);
 }
 
@@ -31,32 +32,35 @@
 }
 
 .primary {
-  background: var(--color-accent);
-  color: #f7fbfb;
-  border: 1px solid var(--color-accent);
+  background: var(--color-button-primary-bg);
+  color: var(--color-button-primary-fg);
+  border: 1px solid var(--color-button-primary-bg);
+  box-shadow: 0 0 0 0 transparent;
 }
 
 .primary:hover {
-  background: var(--color-accent-hover);
-  color: #f7fbfb;
-  border-color: var(--color-accent-hover);
+  background: #ffffff;
+  color: var(--color-button-primary-fg);
+  border-color: #ffffff;
+  box-shadow: 0 0 24px rgba(61, 184, 197, 0.18);
+  transform: translateY(-1px);
 }
 
 .secondary {
-  background: var(--color-surface);
+  background: transparent;
   color: var(--color-fg);
   border: 1px solid var(--color-border-strong);
 }
 
 .secondary:hover {
   background: var(--color-surface-hover);
-  border-color: var(--color-fg-subtle);
+  border-color: var(--color-accent);
   color: var(--color-fg);
 }
 
 .ghost {
   background: transparent;
-  color: var(--color-fg);
+  color: var(--color-fg-muted);
   border: 1px solid var(--color-border);
 }
 
@@ -86,7 +90,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .button:hover .arrow {
+  .button:hover .arrow,
+  .primary:hover {
     transform: none;
   }
 }
