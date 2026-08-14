@@ -20,6 +20,18 @@ Communicate, with integrity:
 - Writing / project insights
 - Continuous development
 
+## Frontend (Phase 2)
+
+The UI must feel like a living editorial work journal:
+
+- distinctive but restrained visual identity
+- project case-study compositions (not SaaS card grids)
+- Explore / Live / GitHub actions when available
+- graceful empty states for missing content
+- content updates via Markdown without React edits
+
+See `docs/DESIGN_SYSTEM.md`.
+
 ## Non-goals (explicit)
 
 - Fabricating metrics, technologies, employers, or outcomes

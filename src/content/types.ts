@@ -131,6 +131,9 @@ export const ProfileFrontmatterSchema = z.object({
 });
 export type ProfileFrontmatter = z.infer<typeof ProfileFrontmatterSchema>;
 
+export const ExperienceLayerSchema = z.enum(["primary", "additional"]);
+export type ExperienceLayer = z.infer<typeof ExperienceLayerSchema>;
+
 export const ExperienceEntrySchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
@@ -140,6 +143,8 @@ export const ExperienceEntrySchema = z.object({
   end: z.string().optional(),
   summary: z.string().optional(),
   highlights: z.array(z.string()).default([]),
+  /** primary = data/analytics/BI focus; additional = broader professional context */
+  layer: ExperienceLayerSchema.default("primary"),
 });
 export type ExperienceEntry = z.infer<typeof ExperienceEntrySchema>;
 

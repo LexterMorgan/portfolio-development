@@ -46,6 +46,17 @@ describe("content loader (repository content)", () => {
     expect(result.projects).toBe(4);
     expect(result.articles).toBe(0);
   });
+
+  it("derives selected/building helpers without inventing featured flags", async () => {
+    const {
+      getSelectedProjects,
+      getBuildingProjects,
+      getPublishedArticles,
+    } = await import("@/content/loader");
+    expect(getSelectedProjects()).toHaveLength(0);
+    expect(getBuildingProjects().length).toBe(4);
+    expect(getPublishedArticles()).toHaveLength(0);
+  });
 });
 
 describe("tech registry", () => {

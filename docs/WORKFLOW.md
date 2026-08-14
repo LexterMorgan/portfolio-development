@@ -20,11 +20,13 @@ Decide positioning, audience, and which projects/articles are in scope. Source m
 
 ## PHASE 2 — Design system and visual language
 
-Typography, grid, color tokens, navigation patterns, project composition primitives, tech icon visual system. Still no full homepage narrative polish until Phase 3 if preferred as a milestone split.
+Typography, grid, color tokens, navigation patterns, project composition primitives, tech icon visual system, homepage composition, project/article/about routes, empty states, SEO foundation, restrained motion.
 
-## PHASE 3 — Homepage
+**Stop condition:** Content-driven UI is navigable end-to-end; missing facts use polished empty states rather than invented content.
 
-Composition for positioning, selected work, currently building, and entry points — driven by content status/featured flags.
+## PHASE 3 — Real content & homepage fill
+
+Populate sourced profile, experience, project facts, screenshots, and featured work so the homepage and case studies carry verified substance.
 
 ## PHASE 4 — Project Explore pages
 

@@ -1,0 +1,39 @@
+.section {
+  position: relative;
+}
+
+.space-default {
+  padding-block: var(--space-8);
+}
+
+.space-compact {
+  padding-block: var(--space-6);
+}
+
+.space-loose {
+  padding-block: var(--space-9);
+}
+
+.default {
+  background: transparent;
+}
+
+.muted {
+  background: var(--color-bg-elevated);
+  border-block: 1px solid var(--color-border);
+}
+
+.accent {
+  background: var(--color-accent-soft);
+  border-block: 1px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+}
+
+@media (max-width: 768px) {
+  .space-default {
+    padding-block: var(--space-7);
+  }
+
+  .space-loose {
+    padding-block: var(--space-8);
+  }
+}

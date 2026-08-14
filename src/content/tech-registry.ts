@@ -1,6 +1,6 @@
 /**
- * Technology icon registry — architecture only (Phase 1).
- * Projects reference canonical IDs; UI renders icons in Phase 2+.
+ * Technology icon registry.
+ * Projects reference canonical IDs; UI renders via TechBadge / TechStackList.
  *
  * Do not invent technologies for projects. Only register IDs that
  * content may legitimately reference after source verification.

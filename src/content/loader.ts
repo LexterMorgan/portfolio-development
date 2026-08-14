@@ -189,6 +189,47 @@ export function getAllArticles(): ArticleDocument[] {
   );
 }
 
+export function getPublishedArticles(): ArticleDocument[] {
+  return getAllArticles()
+    .filter((a) => a.data.status === "published")
+    .sort((a, b) => (b.data.date ?? "").localeCompare(a.data.date ?? ""));
+}
+
+export function getArticleBySlug(slug: string): ArticleDocument | undefined {
+  return getAllArticles().find((a) => a.data.slug === slug);
+}
+
+export function projectExists(slug: string): boolean {
+  return fileExists(path.join(CONTENT_ROOT, "projects", slug, "project.md"));
+}
+
+/** Homepage / index helpers — derived from status + featured, never invented. */
+export function getSelectedProjects(): ProjectDocument[] {
+  return getAllProjects().filter((p) => p.data.featured);
+}
+
+export function getBuildingProjects(): ProjectDocument[] {
+  return getAllProjects().filter(
+    (p) => p.data.status === "in-progress" || p.data.status === "planned",
+  );
+}
+
+export function getCompletedProjects(): ProjectDocument[] {
+  return getAllProjects().filter((p) => p.data.status === "completed");
+}
+
+export function getArchivedProjects(): ProjectDocument[] {
+  return getAllProjects().filter((p) => p.data.status === "archived");
+}
+
+export function getProjectCategories(): string[] {
+  const cats = new Set<string>();
+  for (const p of getAllProjects()) {
+    if (p.data.category) cats.add(p.data.category);
+  }
+  return Array.from(cats).sort();
+}
+
 export function getUpdate(slug: string): MarkdownDocument<UpdateFrontmatter> {
   const filePath = path.join(CONTENT_ROOT, "updates", `${slug}.md`);
   if (!fileExists(filePath)) {

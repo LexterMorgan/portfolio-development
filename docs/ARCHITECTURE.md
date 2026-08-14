@@ -11,14 +11,14 @@ Content parser / loader
         ↓
 Typed content models (Zod)
         ↓
-Reusable components (later phases)
+Reusable components
         ↓
 Pages
         ↓
 Static / deployed website (Vercel)
 ```
 
-## Stack (Phase 1)
+## Stack
 
 | Layer | Choice | Rationale |
 |-------|--------|-----------|
@@ -26,20 +26,41 @@ Static / deployed website (Vercel)
 | Language | TypeScript (strict) | Typed content models |
 | Content | Markdown + YAML frontmatter under `content/` | No CMS/DB for V1 |
 | Validation | Zod | Fail clearly on malformed content |
+| Markdown UI | `react-markdown` | Render content bodies without a CMS |
 | Tests | Vitest | Loader / schema verification |
 | Hosting target | Vercel (static/SSG) | Human-controlled deploy in Phase 10 |
 
-The repository was empty at Phase 1 start (git only). Next.js was chosen as the minimal deployable foundation — not a stack migration.
+## Frontend (Phase 2)
+
+| Area | Location |
+|------|----------|
+| Design tokens | `src/styles/tokens.css` |
+| Design docs | `docs/DESIGN_SYSTEM.md` |
+| Components | `src/components/**` |
+| Routes | `src/app/**` |
+| Metadata helpers | `src/lib/metadata.ts` |
+| Search index shape | `src/lib/search.ts` (UI deferred) |
+
+### Routes
+
+| Path | Purpose |
+|------|---------|
+| `/` | Homepage composition |
+| `/projects` | Project index |
+| `/projects/[slug]` | Explore / case study |
+| `/articles` | Published articles index |
+| `/articles/[slug]` | Article detail |
+| `/about` | Profile, experience, education, skills, currently |
 
 ## Content domains
 
 | Domain | Location | Notes |
 |--------|----------|-------|
 | Profile | `content/profile.md` | Positioning, identity — no invented bio |
-| Experience | `content/experience.md` | Entries only when sourced |
+| Experience | `content/experience.md` | `layer: primary \| additional` |
 | Education | `content/education.md` | Entries only when sourced |
 | Skills | `content/skills.md` | Technologies as IDs, not percentages |
-| Site | `content/site.md` | Site-level metadata / nav labels |
+| Site | `content/site.md` | Site-level metadata |
 | Projects | `content/projects/<slug>/project.md` | Case study + metadata |
 | Articles | `content/projects/<slug>/articles/*.md` | Linked via project slug |
 | Updates | `content/updates/*.md` | Changelog-style entries |
@@ -53,6 +74,7 @@ Project (slug)
 ├── Live deployment       → links.live (optional)
 ├── GitHub repository     → links.github (optional)
 └── Articles / Insights   → articles with frontmatter.project = slug
+                           → /articles/[article-slug]
 ```
 
 Relationships use **stable slugs/IDs**, never hardcoded page imports.
@@ -61,15 +83,11 @@ Relationships use **stable slugs/IDs**, never hardcoded page imports.
 
 Projects reference canonical technology IDs (`python`, `postgresql`, `react`).
 
-Registry (`src/content/tech-registry.ts`) stores:
+Registry (`src/content/tech-registry.ts`) + UI (`TechBadge` / `TechStackList`):
 
-- canonical ID
-- display name
-- category
-- icon asset path (future)
-- optional description / color metadata
-
-UI (later) renders logo + name + optional role/context. Phase 1 defines the registry architecture only — no visual treatment.
+- canonical ID, display name, category
+- icon under `public/icons/tech/` when present
+- monogram fallback when asset missing
 
 ## Project status system
 
@@ -77,20 +95,19 @@ UI (later) renders logo + name + optional role/context. Phase 1 defines the regi
 type ProjectStatus = "idea" | "planned" | "in-progress" | "completed" | "archived";
 ```
 
-Plus `featured: boolean` for homepage selection (Phase 3).
+Plus `featured: boolean`.
 
-Derived sections (future UI):
-
-| Section | Rule (conceptual) |
-|---------|-------------------|
-| Selected Work | `featured === true` and typically `completed` |
-| Currently Building | `status === "in-progress"` (and/or `planned`) |
-| Archived Work | `status === "archived"` |
+| Section | Rule |
+|---------|------|
+| Selected Work | `featured === true` |
+| Currently Building | `status === "in-progress"` or `"planned"` |
+| Completed | `status === "completed"` |
+| Archived | `status === "archived"` |
 
 ## Extensibility
 
 - Add a project: create `content/projects/<slug>/project.md` (+ optional articles).
-- Add an article: create markdown under the project’s `articles/` with `project: <slug>`.
+- Add an article: markdown under the project’s `articles/` with `project: <slug>`.
 - Update “Currently”: edit `content/currently.md`.
 - No main UI rewrite required for content additions.
 
@@ -102,9 +119,10 @@ Derived sections (future UI):
 - Deterministic sorting (date, featured, slug).
 - Malformed content fails with clear errors (`npm run validate:content`).
 
-## Non-architecture (intentionally absent in V1)
+## Non-architecture (intentionally absent)
 
 - Database / headless CMS
 - Auth
+- Analytics/tracking (readiness only)
 - Client-side content fetching for portfolio data
-- Auto-generated metrics from analytics APIs
+- Heavy search UI (index shape prepared)

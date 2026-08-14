@@ -1,6 +1,6 @@
 # TODO — Practical Roadmap
 
-## PHASE 1 (current) — Foundation
+## PHASE 1 — Foundation
 
 - [x] Repository inspection
 - [x] Documentation system (`AGENTS.md`, `docs/*`)
@@ -12,76 +12,85 @@
 - [x] Article ↔ project slug relationships
 - [x] Updates / Currently content concepts
 
-## PHASE 2 — Design system
+## PHASE 2 — Design system & frontend UI
 
 **Required**
 
-- [ ] Visual design system (tokens)
-- [ ] Typography
-- [ ] Grid / layout primitives
-- [ ] Navigation shell
-- [ ] Project composition primitives
-- [ ] Tech icon visual rendering from registry
+- [x] Visual design system (tokens)
+- [x] Typography
+- [x] Grid / layout primitives
+- [x] Navigation shell
+- [x] Project composition primitives
+- [x] Tech icon visual rendering from registry
+- [x] Homepage composition (content-driven)
+- [x] Project index + detail foundation
+- [x] Articles index + detail foundation
+- [x] About / experience / currently / updates
+- [x] SEO metadata foundation
+- [x] Empty / 404 / error states
+- [x] Restrained motion + reduced-motion
+- [x] `docs/DESIGN_SYSTEM.md`
 
 **Optional polish** (separate)
 
-- [ ] Motion language
-- [ ] Advanced illustration / photography direction
+- [ ] Advanced motion language
+- [ ] Photography / illustration direction
+- [ ] Cmd/Ctrl+K search UI (index shape exists)
 
-## PHASE 3 — Homepage
+## PHASE 3 — Real content & visual fill
 
 **Required**
 
-- [ ] Homepage composition from content
-- [ ] Selected Work / Currently Building / Archived driven by status + featured
+- [ ] Sourced profile / experience / education / skills
+- [ ] Verified project facts, stacks, links
+- [ ] Real project screenshots / dashboard previews
+- [ ] Featured flags on verified selected work
+- [ ] Homepage content rhythm with real artifacts
 
 **Optional polish**
 
-- [ ] Editorial motion
+- [ ] Editorial motion refinement
 - [ ] Ambient imagery
 
-## PHASE 4 — Project Explore pages
+## PHASE 4 — Project Explore depth
 
 **Required**
 
-- [ ] Explore route + 5W1H sections
-- [ ] Live / Vercel + GitHub actions
-- [ ] Tech stack from registry
-- [ ] Findings + limitations + integrity notes
+- [ ] Complete 5W1H narratives from sources
+- [ ] Live / Vercel + GitHub when available
+- [ ] Findings + limitations + integrity notes filled
 
 **Optional polish**
 
-- [ ] Artifact galleries
+- [ ] Artifact galleries with real charts/tables
 - [ ] Deep-linked section chrome
 
 ## PHASE 5 — Articles / Insights
 
 **Required**
 
-- [ ] Article index + detail
-- [ ] Project linkage via slugs
+- [ ] First published articles linked to projects
 
 **Optional polish**
 
 - [ ] Reading progress
 - [ ] Related-article rails
 
-## PHASE 6 — Experience / About / Current Focus
+## PHASE 6 — Experience / About refinement
 
 **Required**
 
-- [ ] Experience pages/sections from content
-- [ ] About / beyond analytics
-- [ ] Currently (`content/currently.md`)
+- [ ] Sourced experience layers (primary / additional)
+- [ ] Currently populated
 - [ ] Upcoming projects surface
 
 ## PHASE 7 — Responsive & accessibility QA
 
 **Required**
 
-- [ ] Responsive QA
+- [ ] Responsive QA across target breakpoints
 - [ ] Accessibility pass
-- [ ] SEO basics
+- [ ] SEO refinement
 - [ ] Performance baseline
 
 ## PHASE 8 — Content audit & production readiness
@@ -94,7 +103,6 @@
 ## Optional global polish (never block required work)
 
 - [ ] Experiments / playground
-- [ ] Changelog UI for `content/updates/`
 - [ ] OG image pipeline
 - [ ] RSS for articles
 

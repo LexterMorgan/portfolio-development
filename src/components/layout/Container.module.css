@@ -1,0 +1,26 @@
+.container {
+  width: min(100% - 2.5rem, var(--max, var(--container-content)));
+  margin-inline: auto;
+}
+
+.narrow {
+  --max: var(--container-narrow);
+}
+
+.reading {
+  --max: var(--container-reading);
+}
+
+.content {
+  --max: var(--container-content);
+}
+
+.wide {
+  --max: var(--container-wide);
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: min(100% - 1.5rem, var(--max, var(--container-content)));
+  }
+}

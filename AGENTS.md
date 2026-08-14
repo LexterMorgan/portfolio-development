@@ -56,3 +56,7 @@ npm run build
 ```
 
 Skip only what does not yet exist; never skip validation silently after content/schema changes.
+
+## Phase note
+
+Phase 2 established the design system and UI. Continue to prefer content edits over component edits for portfolio facts.

@@ -6,16 +6,29 @@ Editorial work-journal positioning. Content is separated from presentation.
 
 ## Phase status
 
-**Phase 1 — Foundation & content architecture** (current).
+**Phase 2 — Design system & frontend UI** (current complete for UI foundation).
 
-Visual design, homepage UI, and deployment are intentionally out of scope until later phases. See `docs/WORKFLOW.md`.
+Next: populate verified content, screenshots, and case-study substance (Phase 3+). See `docs/WORKFLOW.md` and `docs/DESIGN_SYSTEM.md`.
 
 ## Stack
 
 - Next.js (App Router) + TypeScript
 - File-based Markdown/frontmatter content under `content/`
 - Zod schemas + loaders in `src/content/`
+- CSS design tokens + component modules
+- `react-markdown` for content bodies
 - Vitest for loader/schema validation
+
+## Routes
+
+| Path | Purpose |
+|------|---------|
+| `/` | Home |
+| `/projects` | Work index |
+| `/projects/[slug]` | Case study |
+| `/articles` | Insights index |
+| `/articles/[slug]` | Article |
+| `/about` | About |
 
 ## Documentation
 
@@ -24,6 +37,7 @@ Visual design, homepage UI, and deployment are intentionally out of scope until 
 | `AGENTS.md` | Repository-wide agent rules |
 | `docs/PRD.md` | Product requirements |
 | `docs/ARCHITECTURE.md` | Content/presentation architecture |
+| `docs/DESIGN_SYSTEM.md` | Visual system & UI architecture |
 | `docs/WORKFLOW.md` | Phased delivery plan |
 | `docs/DATA_SOURCES.md` | Legitimate source material |
 | `docs/RESEARCH_METHOD.md` | Analytical integrity rules |
