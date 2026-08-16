@@ -24,7 +24,9 @@ Typography, grid, color tokens, navigation patterns, project composition primiti
 
 **Stop condition:** Content-driven UI is navigable end-to-end; missing facts use polished empty states rather than invented content.
 
-## PHASE 3 — Real content & homepage fill
+## PHASE 3 — Frontend art direction & interaction redesign
+
+Locked dark editorial art direction (Newsreader / Source Sans 3 / IBM Plex Mono; cyan accent on near-black navy). Homepage IA, editorial project rows, process/capabilities shells, unified motion language, responsive polish. Content remains loader-driven; empty fields use intentional empty states — no fabricated facts.
 
 Populate sourced profile, experience, project facts, screenshots, and featured work so the homepage and case studies carry verified substance.
 

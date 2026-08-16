@@ -1,11 +1,11 @@
 ---
 slug: dark-hero-redesign
-title: "Dark cinematic theme & interactive hero portrait"
-date: "2026-08-14"
+title: "Dark editorial theme & hero portrait polish"
+date: "2026-08-15"
 tags:
   - design
   - hero
   - dark-theme
 ---
 
-Applied a dark premium visual system across the site and added an interactive hero portrait transformation (professional default → alternate persona on hover/tap). Content architecture and claims integrity remain unchanged.
+Applied a dark premium editorial visual system across the site and refined the hero portrait integration into the background. Character-transform experiments were removed. Content architecture and claims integrity remain unchanged.

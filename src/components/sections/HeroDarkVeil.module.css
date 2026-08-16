@@ -1,0 +1,54 @@
+.root {
+  position: absolute;
+  top: calc(-1 * var(--header-height));
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.field {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(
+    ellipse 88% 78% at 72% 42%,
+    #000 0%,
+    rgba(0, 0, 0, 0.45) 58%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    ellipse 88% 78% at 72% 42%,
+    #000 0%,
+    rgba(0, 0, 0, 0.45) 58%,
+    transparent 82%
+  );
+}
+
+.field :global(canvas) {
+  pointer-events: none;
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 58% 50% at 74% 30%,
+      color-mix(in srgb, var(--color-accent) 8%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 40% 40% at 18% 78%,
+      color-mix(in srgb, var(--color-accent) 4%, transparent),
+      transparent 70%
+    );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field {
+    opacity: 0.32;
+  }
+}

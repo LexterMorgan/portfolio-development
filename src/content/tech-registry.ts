@@ -12,17 +12,11 @@ export type TechIconEntry = {
   id: string;
   name: string;
   category: TechCategory;
-  /** Future path under /public/icons/tech/ — optional until assets exist. */
   icon?: string;
   description?: string;
-  /** Optional brand/accent hint for later UI — not used in Phase 1. */
   color?: string;
 };
 
-/**
- * Seed registry of common IDs. Presence here does NOT claim the
- * portfolio owner uses the technology — project content must opt in.
- */
 export const TECH_REGISTRY: Record<string, TechIconEntry> = {
   python: {
     id: "python",
@@ -38,6 +32,30 @@ export const TECH_REGISTRY: Record<string, TechIconEntry> = {
     icon: "/icons/tech/pandas.svg",
     description: "Tabular data manipulation",
   },
+  numpy: {
+    id: "numpy",
+    name: "NumPy",
+    category: "data",
+    description: "Numerical computing",
+  },
+  matplotlib: {
+    id: "matplotlib",
+    name: "Matplotlib",
+    category: "bi",
+    description: "Analytical charting",
+  },
+  scikitlearn: {
+    id: "scikitlearn",
+    name: "scikit-learn",
+    category: "ml",
+    description: "Machine learning tooling",
+  },
+  sqlite: {
+    id: "sqlite",
+    name: "SQLite",
+    category: "database",
+    description: "Embedded analytical database",
+  },
   sql: {
     id: "sql",
     name: "SQL",
@@ -51,6 +69,30 @@ export const TECH_REGISTRY: Record<string, TechIconEntry> = {
     category: "database",
     icon: "/icons/tech/postgresql.svg",
     description: "Relational / analytical database",
+  },
+  sqlalchemy: {
+    id: "sqlalchemy",
+    name: "SQLAlchemy",
+    category: "database",
+    description: "Python database toolkit",
+  },
+  mysql: {
+    id: "mysql",
+    name: "MySQL",
+    category: "database",
+    description: "Relational database",
+  },
+  mongodb: {
+    id: "mongodb",
+    name: "MongoDB",
+    category: "database",
+    description: "Document database",
+  },
+  r: {
+    id: "r",
+    name: "R",
+    category: "data",
+    description: "Statistical programming",
   },
   react: {
     id: "react",
@@ -73,12 +115,36 @@ export const TECH_REGISTRY: Record<string, TechIconEntry> = {
     icon: "/icons/tech/nextjs.svg",
     description: "Web application framework",
   },
+  vite: {
+    id: "vite",
+    name: "Vite",
+    category: "tooling",
+    description: "Frontend tooling",
+  },
+  recharts: {
+    id: "recharts",
+    name: "Recharts",
+    category: "bi",
+    description: "Interactive charting",
+  },
+  express: {
+    id: "express",
+    name: "Express",
+    category: "backend",
+    description: "API server",
+  },
   vercel: {
     id: "vercel",
     name: "Vercel",
     category: "deployment",
     icon: "/icons/tech/vercel.svg",
     description: "Deployment platform",
+  },
+  git: {
+    id: "git",
+    name: "Git",
+    category: "tooling",
+    description: "Version control",
   },
   powerbi: {
     id: "powerbi",
@@ -93,6 +159,18 @@ export const TECH_REGISTRY: Record<string, TechIconEntry> = {
     category: "bi",
     icon: "/icons/tech/tableau.svg",
     description: "Business intelligence",
+  },
+  excel: {
+    id: "excel",
+    name: "Excel",
+    category: "bi",
+    description: "Spreadsheet analysis",
+  },
+  lookerstudio: {
+    id: "lookerstudio",
+    name: "Looker Studio",
+    category: "bi",
+    description: "Dashboard reporting",
   },
 };
 
@@ -123,7 +201,6 @@ export function resolveTechStack(
   return resolved;
 }
 
-/** Validate that every ID in a tech_stack exists in the registry. */
 export function assertTechStackRegistered(
   stack: Partial<Record<TechCategory, string[]>>,
   context: string,

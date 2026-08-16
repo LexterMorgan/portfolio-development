@@ -15,7 +15,7 @@ export function FeaturedProject({
 }) {
   const { data } = project;
   return (
-    <article className={styles.featured}>
+    <article className={styles.featured} data-cursor="explore">
       <div className={styles.header}>
         <ProjectMeta project={project} index={index} />
         <h3 className={styles.title}>

@@ -1,5 +1,5 @@
 .container {
-  width: min(100% - 2.5rem, var(--max, var(--container-content)));
+  width: min(100% - (var(--gutter) * 2), var(--max, var(--container-content)));
   margin-inline: auto;
 }
 
@@ -19,8 +19,8 @@
   --max: var(--container-wide);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .container {
-    width: min(100% - 1.5rem, var(--max, var(--container-content)));
+    width: min(100% - (var(--gutter-sm) * 2), var(--max, var(--container-content)));
   }
 }

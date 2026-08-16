@@ -1,0 +1,43 @@
+.root {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  padding-block: clamp(3rem, 10vw, 7rem);
+  margin-block: var(--space-4);
+  --drift: 0px;
+}
+
+.inner {
+  transform: translate3d(0, var(--drift), 0);
+  transition: transform 80ms linear;
+  display: grid;
+  gap: 0.15em;
+  text-align: center;
+}
+
+.line {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 12vw, 8.5rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-fg) 7%, transparent);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner {
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .line {
+    font-size: clamp(2.4rem, 14vw, 4.2rem);
+    white-space: normal;
+  }
+}

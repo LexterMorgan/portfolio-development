@@ -17,81 +17,125 @@ Motif: **DATA + EDITORIAL + PRODUCT + PERSONAL BRAND**
 
 | Token idea | Choice |
 |------------|--------|
-| Background | Near-black navy `#070B12` with cyan ambient glow |
+| Background | Near-black navy `#070B12` with restrained cyan ambient light |
 | Foreground | Off-white `#EEF3F7` |
 | Accent | Restrained cyan/teal `#3DB8C5` |
-| Secondary accent | Soft violet for portrait easter-egg only |
 | Display type | Newsreader |
 | Body type | Source Sans 3 |
 | Mono / meta | IBM Plex Mono |
 
-Hero portrait: professional default with cut-out integration; Gojo revealed on desktop hover / mobile tap. Alignment reference composite is **not** rendered as the hero.
+Identity remains navy + cyan. Syfrsam is a quality reference only — not layout or brand cloning.
 
-Avoided: purple SaaS gradients, glassmorphism, oversized rounded cards, skill bars, glow-everywhere UI, anime-themed chrome outside the portrait easter egg.
-
-## Typography scale
-
-Defined in `src/styles/tokens.css`:
-
-- display / hero
-- page heading
-- section heading
-- titles
-- body
-- metadata / labels
-- code
+Avoided: purple SaaS gradients, heavy glassmorphism, skill bars, neon overload, fake metrics, custom cursors, giant shadows.
 
 ## Color tokens
 
-`--color-bg`, `--color-fg`, `--color-fg-muted`, `--color-border`, `--color-accent`, `--color-surface`, `--color-success|warning|danger`, `--color-focus`, etc.
+Defined in `src/styles/tokens.css`.
+
+### Surfaces
+
+- `--color-bg` / `--color-background` — page base `#070B12`
+- `--color-bg-subtle` / `--color-background-subtle`
+- `--color-surface` · `--color-surface-hover` · `--color-surface-elevated`
+
+### Text
+
+- `--color-fg` / `--color-text-primary`
+- `--color-fg-muted` / `--color-text-secondary`
+- `--color-fg-subtle` / `--color-text-muted`
+- `--color-fg-disabled` / `--color-text-disabled`
+
+### Accent & borders
+
+- `--color-accent` · `--color-accent-hover` · `--color-accent-subtle`
+- `--color-border` · `--color-border-subtle` · `--color-border-strong` · `--color-border-accent`
+
+### Status
+
+- `--color-success` · `--color-warning` · `--color-danger` / `--color-error`
+- `--color-focus`
+
+Legacy names (`--color-fg`, `--color-bg`, `--color-danger`, etc.) remain for existing modules.
+
+## Typography scale
+
+Responsive via `clamp` where needed:
+
+| Token | Use |
+|-------|-----|
+| `--text-display` | Hero display |
+| `--text-page` | Page heading |
+| `--text-section` | Section heading |
+| `--text-subheading` | Subheading |
+| `--text-body-lg` / `--text-body` / `--text-small` | Body levels |
+| `--text-meta` | Metadata |
+| `--text-label` | Technical / section labels |
+
+Newsreader → editorial headings · Source Sans 3 → UI/body · IBM Plex Mono → metadata only.
 
 ## Spacing & layout
 
 Spacing scale `--space-1` … `--space-10`.
 
-Containers:
+Containers (`Container` width prop):
 
 - `narrow` — contact / 404
 - `reading` — articles / case-study prose
 - `content` — default
 - `wide` — homepage / project index
 
+Gutter: `--gutter` (desktop) · `--gutter-sm` (mobile).
+
+Grid utilities in `globals.css`: `.grid-2`, `.grid-3`, `.grid-asymmetric` (stack below 900px).
+
+## Motion
+
+| Token | Intent |
+|-------|--------|
+| `--duration-micro` (~180ms) | Micro interactions |
+| `--duration-fast` (~200ms) | Fast UI |
+| `--duration-base` (~320ms) | Normal UI |
+| `--duration-slow` / `--duration-reveal` | Content reveal |
+| `--duration-editorial` (~900ms) | Large editorial |
+
+`prefers-reduced-motion: reduce` zeroes token durations and disables decorative transforms in Reveal / hover states.
+
+Primitives: **Reveal**, **Marquee**, CSS transitions only. No Motion / GSAP / React Bits yet.
+
 ## Component architecture
 
 ```
 src/components/
-  layout/        Container, Section, SectionHeading, Breadcrumb, Divider
+  layout/        Container, Section, SectionHeading, SectionLabel, Breadcrumb, Divider
   navigation/    SiteHeader, SiteFooter
-  ui/            Button, TextLink, Label, EmptyState, StatusBadge
+  ui/            Button, TextLink, Label, EmptyState, StatusBadge, Card, Reveal, Marquee
   tech/          TechBadge, TechStackList
   projects/      Card, Featured, Grid, Meta, Links, Preview, 5W1H, Findings, Artifacts
   articles/      ArticleCard
   experience/    ExperienceItem
-  sections/      Hero, Capabilities, Currently, Updates
+  sections/      Hero, Capabilities, Currently, Updates, …
   typography/    Prose
 ```
 
-## Project composition
+### SectionLabel
 
-Explore (primary) · Live · GitHub (only when URLs exist).
+Reusable editorial label: `01 / SELECTED WORK`. Cyan index, muted mono label. Accepts `index` + `label`, or a parseable `children` / eyebrow string.
 
-Featured vs building vs archived derived from `featured` + `status` in content — never fabricated.
+### Card
 
-## Technology icons
+Foundation tones: `default` | `hover` | `active` | `featured`. Distinguishes via border + surface, not heavy shadow.
 
-Registry in `src/content/tech-registry.ts`. UI resolves icons from `public/icons/tech/` with monogram fallback if a file is missing. Projects must not invent stack IDs.
+### Button
 
-## Artifacts
+`primary` · `secondary` · `ghost` · `text` — hover / focus / active / disabled. Optional arrow shift.
 
-`ArtifactBlock` / `ArtifactGallery` support dashboard, chart, table, code, diagrams, etc. No fake artifacts are seeded.
+### Preview
 
-## Motion
-
-CSS-only reveals and hover arrow shifts. Honors `prefers-reduced-motion`.
+`ProjectPreview`: responsive aspect ratio, subtle border, transparent-friendly background (no white boxes).
 
 ## Accessibility
 
-Semantic landmarks, focus-visible rings, accessible mobile nav, alt text on images, empty states instead of broken UI.
+Semantic landmarks, cyan focus-visible rings, accessible mobile nav, alt text on images, empty states instead of broken UI. Selection + subtle scrollbar polish in `globals.css`.
 
 ## Search (deferred UI)
 

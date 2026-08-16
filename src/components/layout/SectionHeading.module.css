@@ -13,15 +13,7 @@
 .copy {
   display: grid;
   gap: var(--space-3);
-  max-width: 40rem;
-}
-
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-accent);
+  max-width: 42rem;
 }
 
 .titleRow {
@@ -32,18 +24,25 @@
 }
 
 .title {
+  font-family: var(--font-display);
   font-size: var(--text-section);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display);
+  margin: 0;
 }
 
 .meta {
   font-family: var(--font-mono);
   font-size: var(--text-meta);
-  color: var(--color-fg-subtle);
+  color: var(--color-text-muted);
 }
 
 .description {
-  color: var(--color-fg-muted);
-  max-width: 36rem;
+  color: var(--color-text-secondary);
+  max-width: 38rem;
+  line-height: var(--leading-body);
+  margin: 0;
+  font-size: var(--text-body);
 }
 
 .action {
@@ -54,5 +53,9 @@
   .split {
     grid-template-columns: 1fr;
     align-items: start;
+  }
+
+  .heading {
+    margin-bottom: var(--space-5);
   }
 }

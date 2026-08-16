@@ -1,55 +1,90 @@
 /**
- * Design tokens — dark cinematic editorial system.
- * Prefer these CSS custom properties over hardcoded values in components.
+ * Design tokens — dark premium portfolio system.
+ * Identity: deep navy / black + off-white + cool cyan accent (#3DB8C5).
+ *
+ * Canonical names below. Legacy aliases kept for existing components.
  */
 
 :root {
-  /* Color — near-black navy, off-white type, restrained cyan/teal */
+  /* ── Color: backgrounds & surfaces ── */
   --color-bg: #070b12;
-  --color-bg-elevated: #0c121b;
-  --color-fg: #eef3f7;
-  --color-fg-muted: #9aa7b5;
-  --color-fg-subtle: #6d7b8c;
-  --color-border: rgba(154, 175, 196, 0.14);
-  --color-border-strong: rgba(154, 175, 196, 0.28);
-  --color-accent: #3db8c5;
-  --color-accent-hover: #5ccbd5;
-  --color-accent-soft: rgba(61, 184, 197, 0.12);
-  --color-accent-secondary: #7b6cff;
-  --color-surface: #0f1622;
-  --color-surface-hover: #141d2b;
+  --color-bg-subtle: #0a1018;
+  --color-bg-elevated: #0e1620;
+  --color-surface: #121a24;
+  --color-surface-hover: #182230;
+  --color-surface-elevated: #1c2733;
+
+  --color-background: var(--color-bg);
+  --color-background-subtle: var(--color-bg-subtle);
+  --color-background-elevated: var(--color-bg-elevated);
+
+  /* ── Color: text ── */
+  --color-fg: #fafafa;
+  --color-fg-muted: #a1a1aa;
+  --color-fg-subtle: #71717a;
+  --color-fg-disabled: #52525b;
+
+  --color-text-primary: var(--color-fg);
+  --color-text-secondary: var(--color-fg-muted);
+  --color-text-muted: var(--color-fg-subtle);
+  --color-text-disabled: var(--color-fg-disabled);
+
+  /* ── Color: accent (cool cyan, used sparingly) ── */
+  --accent: #3db8c5;
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --accent-muted: color-mix(in srgb, var(--accent) 62%, var(--color-fg-muted));
+  --accent-glow: color-mix(in srgb, var(--accent) 28%, transparent);
+  --color-accent: var(--accent);
+  --color-accent-hover: #63c9d4;
+  --color-accent-fg: #070b12;
+  --color-accent-subtle: var(--accent-soft);
+  --color-accent-soft: var(--accent-soft);
+  --color-glow: var(--accent-glow);
+
+  /* ── Color: borders ── */
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-border-accent: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+
+  /* ── Color: semantic status ── */
   --color-success: #3dba7a;
   --color-warning: #d4a017;
   --color-danger: #e25b5b;
-  --color-focus: #5ccbd5;
-  --color-overlay: rgba(3, 6, 12, 0.72);
-  --color-button-primary-bg: #eef3f7;
-  --color-button-primary-fg: #070b12;
-  --color-glow: rgba(61, 184, 197, 0.22);
-  --color-glow-alt: rgba(123, 108, 255, 0.2);
+  --color-error: var(--color-danger);
+  --color-focus: var(--color-accent);
+  --color-overlay: rgba(7, 11, 18, 0.72);
 
-  /* Typography */
-  --font-display: var(--font-display-family), "Times New Roman", serif;
+  /* ── Color: buttons ── */
+  --color-button-primary-bg: var(--color-accent);
+  --color-button-primary-fg: var(--color-accent-fg);
+  --color-button-primary-hover: var(--color-accent-hover);
+
+  /* ── Typography families ── */
+  --font-display: var(--font-display-family), "Helvetica Neue", sans-serif;
   --font-body: var(--font-body-family), "Helvetica Neue", sans-serif;
   --font-mono: var(--font-mono-family), ui-monospace, monospace;
 
-  --text-display: clamp(2.5rem, 5.2vw, 4rem);
-  --text-page: clamp(2rem, 3.5vw, 2.75rem);
-  --text-section: clamp(1.35rem, 2vw, 1.75rem);
+  /* ── Type scale (responsive) ── */
+  --text-display: clamp(2.75rem, 7.2vw, 6rem);
+  --text-page: clamp(2.1rem, 4.4vw, 3.5rem);
+  --text-section: clamp(1.65rem, 2.8vw, 2.4rem);
+  --text-subheading: clamp(1.15rem, 1.6vw, 1.35rem);
   --text-title: 1.25rem;
+  --text-body-lg: 1.125rem;
   --text-body: 1.0625rem;
   --text-small: 0.9375rem;
   --text-meta: 0.8125rem;
-  --text-label: 0.75rem;
+  --text-label: 0.72rem;
   --text-code: 0.875rem;
 
-  --leading-tight: 1.12;
-  --leading-snug: 1.35;
-  --leading-body: 1.65;
-  --tracking-display: -0.025em;
-  --tracking-label: 0.08em;
+  --leading-tight: 1;
+  --leading-snug: 1.28;
+  --leading-body: 1.7;
+  --tracking-display: -0.04em;
+  --tracking-label: 0.12em;
 
-  /* Spacing scale */
+  /* ── Spacing scale ── */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -57,36 +92,58 @@
   --space-5: 1.5rem;
   --space-6: 2rem;
   --space-7: 3rem;
-  --space-8: 4rem;
-  --space-9: 6rem;
-  --space-10: 8rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+  --space-10: 9rem;
 
-  /* Layout */
+  /* ── Layout ── */
   --container-narrow: 38rem;
   --container-reading: 42rem;
   --container-content: 68rem;
-  --container-wide: 80rem;
-  --header-height: 4rem;
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
+  --container-wide: 78rem;
+  --header-height: 4.25rem;
+  --announce-height: 2.5rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --gutter-sm: 1.25rem;
+  --mobile-nav-height: 4.25rem;
 
-  /* Motion */
+  /* ── Radii ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  /* ── Shadows ── */
+  --shadow-xs: 0 1px 0 rgba(255, 255, 255, 0.04);
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-frame: var(--shadow-xs), 0 20px 48px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 24px var(--color-glow);
+
+  /* ── Motion ── */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 450ms;
-  --duration-portrait: 480ms;
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-micro: 180ms;
+  --duration-fast: 200ms;
+  --duration-base: 320ms;
+  --duration-slow: 520ms;
+  --duration-reveal: 700ms;
+  --duration-editorial: 900ms;
 
-  /* Shadows — restrained cinematic depth */
-  --shadow-frame: 0 1px 0 rgba(255, 255, 255, 0.03), 0 18px 40px rgba(0, 0, 0, 0.35);
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 900px;
+  --bp-xl: 1024px;
+  --bp-2xl: 1280px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   :root {
+    --duration-micro: 0ms;
     --duration-fast: 0ms;
     --duration-base: 0ms;
     --duration-slow: 0ms;
-    --duration-portrait: 180ms;
+    --duration-reveal: 0ms;
+    --duration-editorial: 0ms;
   }
 }

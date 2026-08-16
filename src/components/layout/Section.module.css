@@ -1,17 +1,21 @@
 .section {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
 }
 
 .space-default {
-  padding-block: var(--space-8);
+  padding-block: clamp(3.5rem, 8vw, var(--space-8));
 }
 
 .space-compact {
-  padding-block: var(--space-6);
+  padding-block: clamp(2rem, 5vw, var(--space-6));
 }
 
 .space-loose {
-  padding-block: var(--space-9);
+  padding-block: clamp(5rem, 12vw, var(--space-9));
 }
 
 .default {
@@ -19,13 +23,13 @@
 }
 
 .muted {
-  background: var(--color-bg-elevated);
-  border-block: 1px solid var(--color-border);
+  background: transparent;
+  border-block: 0;
 }
 
 .accent {
-  background: var(--color-accent-soft);
-  border-block: 1px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  background: var(--color-accent-subtle);
+  border-block: 1px solid color-mix(in srgb, var(--color-accent) 16%, transparent);
 }
 
 @media (max-width: 768px) {

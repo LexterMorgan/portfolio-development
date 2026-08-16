@@ -5,6 +5,15 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   box-shadow: var(--shadow-frame);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.featured:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 28%, var(--color-border));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-frame), 0 0 28px var(--accent-soft);
 }
 
 .header {
@@ -22,6 +31,7 @@
 .title a {
   text-decoration: none;
   color: inherit;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .title a:hover {
@@ -49,5 +59,11 @@
 @media (max-width: 768px) {
   .featured {
     padding: var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured:hover {
+    transform: none;
   }
 }

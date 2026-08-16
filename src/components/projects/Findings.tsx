@@ -10,18 +10,34 @@ export function FindingsList({ findings }: { findings: Finding[] }) {
     );
   }
 
+  const withMetric = findings.filter((f) => f.metric && f.label);
+
   return (
-    <ul className={styles.list}>
-      {findings.map((finding, index) => (
-        <li key={`${finding.summary}-${index}`} className={styles.item}>
-          <span className={styles.evidence}>{finding.evidence}</span>
-          <p className={styles.summary}>{finding.summary}</p>
-          {finding.source ? (
-            <p className={styles.source}>Source: {finding.source}</p>
-          ) : null}
-        </li>
-      ))}
-    </ul>
+    <div className={styles.wrap}>
+      {withMetric.length > 0 ? (
+        <ul className={styles.metrics} aria-label="Key metrics from project dataset">
+          {withMetric.map((finding, index) => (
+            <li key={`${finding.metric}-${index}`} className={styles.metric}>
+              <p className={styles.metricValue}>{finding.metric}</p>
+              <p className={styles.metricLabel}>{finding.label}</p>
+              <span className={styles.evidence}>{finding.evidence}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+
+      <ul className={styles.list}>
+        {findings.map((finding, index) => (
+          <li key={`${finding.summary}-${index}`} className={styles.item}>
+            <span className={styles.evidence}>{finding.evidence}</span>
+            <p className={styles.summary}>{finding.summary}</p>
+            {finding.source ? (
+              <p className={styles.source}>Source: {finding.source}</p>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

@@ -2,33 +2,84 @@
   position: relative;
   overflow: hidden;
   border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-frame);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+  --spot-x: 50%;
+  --spot-y: 42%;
+  --shift-x: 0px;
+  --shift-y: 0px;
 }
 
-.card {
-  aspect-ratio: 16 / 10;
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    circle 42% at var(--spot-x) var(--spot-y),
+    color-mix(in srgb, var(--color-accent) 16%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+  mix-blend-mode: soft-light;
 }
 
-.featured {
-  aspect-ratio: 16 / 9;
+.frame:hover {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--color-border));
+  box-shadow: var(--shadow-sm), 0 0 28px var(--accent-soft);
 }
 
+.frame:hover::after {
+  opacity: 1;
+}
+
+.card,
+.featured,
 .hero {
-  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  padding: 0.7rem;
 }
 
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  transition:
+    transform var(--duration-slow) var(--ease-out),
+    filter var(--duration-base) var(--ease-out);
+}
+
+.frame:hover .image {
+  transform: translate3d(var(--shift-x), var(--shift-y), 0) scale(1.03);
+  filter: brightness(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame:hover .image {
+    transform: none;
+    filter: none;
+  }
+
+  .frame::after {
+    display: none;
+  }
 }
 
 .fallback {
   display: grid;
   place-items: center;
   background:
-    linear-gradient(135deg, rgba(61, 184, 197, 0.1), transparent 45%),
+    linear-gradient(135deg, var(--color-accent-subtle), transparent 45%),
     repeating-linear-gradient(
       -45deg,
       transparent,
@@ -58,9 +109,10 @@
 .fallbackTitle {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 2vw, 1.75rem);
+  color: var(--color-text-primary);
 }
 
 .fallbackHint {
-  color: var(--color-fg-muted);
+  color: var(--color-text-secondary);
   font-size: var(--text-small);
 }

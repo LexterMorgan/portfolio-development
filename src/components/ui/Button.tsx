@@ -10,6 +10,8 @@ type CommonProps = {
   size?: ButtonSize;
   className?: string;
   arrow?: boolean;
+  /** Native file download. Pass a filename to set the saved name. */
+  download?: string | boolean;
 };
 
 type ButtonAsLink = CommonProps & {
@@ -30,16 +32,38 @@ function buttonClasses(
     .join(" ");
 }
 
+function DownloadGlyph() {
+  return (
+    <svg
+      className={styles.downloadIcon}
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      aria-hidden
+    >
+      <path d="M12 4v11" />
+      <path d="m7 11 5 5 5-5" />
+      <path d="M5 20h14" />
+    </svg>
+  );
+}
+
 function ButtonLabel({
   children,
   arrow,
+  downloadIcon,
 }: {
   children: React.ReactNode;
   arrow?: boolean;
+  downloadIcon?: boolean;
 }) {
   return (
     <>
       <span>{children}</span>
+      {downloadIcon ? <DownloadGlyph /> : null}
       {arrow ? (
         <span aria-hidden className={styles.arrow}>
           →
@@ -56,11 +80,24 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
       href,
       external,
       arrow,
+      download,
       variant = "primary",
       size = "md",
       className,
     } = props;
     const classes = buttonClasses(variant, size, className);
+    if (download) {
+      return (
+        <a
+          href={href}
+          className={classes}
+          download={typeof download === "string" ? download : true}
+          data-cursor="hot"
+        >
+          <ButtonLabel downloadIcon>{children}</ButtonLabel>
+        </a>
+      );
+    }
     if (external) {
       return (
         <a
@@ -68,13 +105,14 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
           className={classes}
           target="_blank"
           rel="noopener noreferrer"
+          data-cursor="hot"
         >
           <ButtonLabel arrow={arrow}>{children}</ButtonLabel>
         </a>
       );
     }
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} data-cursor="hot">
         <ButtonLabel arrow={arrow}>{children}</ButtonLabel>
       </Link>
     );
@@ -92,7 +130,12 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
   } = buttonProps;
 
   return (
-    <button type={type} className={buttonClasses(variant, size, className)} {...rest}>
+    <button
+      type={type}
+      className={buttonClasses(variant, size, className)}
+      {...rest}
+      data-cursor="hot"
+    >
       <ButtonLabel arrow={arrow}>{children}</ButtonLabel>
     </button>
   );

@@ -3,82 +3,80 @@ import {
   getArchivedProjects,
   getBuildingProjects,
   getCompletedProjects,
-  getProjectCategories,
-  getSelectedProjects,
 } from "@/content";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Container } from "@/components/layout/Container";
-import { Breadcrumb } from "@/components/layout/Breadcrumb";
+import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { EmptyState, Label } from "@/components/ui/Label";
+import { EmptyState } from "@/components/ui/Label";
+import { Reveal } from "@/components/ui/Reveal";
 import styles from "./projects.module.css";
 
 export function generateMetadata() {
   return buildPageMetadata({
-    title: "Work",
+    title: "Projects",
     description:
-      "Project index — analytical case studies across data analytics, BI, and data products.",
+      "Completed analytical work across customer retention, competitive research, communication intelligence, and retail BI.",
     path: "/projects",
   });
 }
 
 export default function ProjectsPage() {
   const all = getAllProjects();
-  const selected = getSelectedProjects();
   const building = getBuildingProjects();
   const completed = getCompletedProjects();
   const archived = getArchivedProjects();
-  const categories = getProjectCategories();
 
   return (
-    <main>
-      <Container width="wide">
-        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Work" }]} />
-        <SectionHeading
-          eyebrow="Project index"
-          title="Work"
-          description="Complete overview of portfolio projects. Status and featured flags come from content — categories appear only when present."
-          meta={`${all.length} projects`}
-        />
+    <main className={styles.page}>
+      <Section spaced="compact">
+        <Container width="wide">
+          <Reveal>
+            <p className={styles.eyebrow}>Projects</p>
+            <h1 className={styles.heroTitle}>Selected Work</h1>
+            <p className={styles.heroLede}>
+              Proof of work across four analytical disciplines — each project
+              answers a different question.
+            </p>
+            <p className={styles.meta}>{all.length} projects</p>
+          </Reveal>
+        </Container>
+      </Section>
 
-        {categories.length > 0 ? (
-          <div className={styles.categories}>
-            <Label>Categories in content</Label>
-            <ul className={styles.catList}>
-              {categories.map((category) => (
-                <li key={category}>{category}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-
-        {selected.length > 0 ? (
+      <Container width="wide" className={styles.blocks}>
+        {completed.length > 0 ? (
           <section className={styles.block}>
-            <h2 className={styles.blockTitle}>Featured</h2>
-            <ProjectGrid projects={selected} variant="featured-first" />
+            <SectionHeading
+              index="03"
+              label="Completed"
+              title="Completed work"
+              description="Four verified repositories — listed once, ordered for narrative progression."
+              meta={`${String(completed.length).padStart(2, "0")} projects`}
+            />
+            <ProjectGrid projects={completed} startIndex={1} />
           </section>
         ) : null}
 
         <section className={styles.block}>
-          <h2 className={styles.blockTitle}>Building / planned</h2>
+          <SectionHeading
+            index="02"
+            label="Index"
+            title="Building & planned"
+          />
           {building.length > 0 ? (
             <ProjectGrid projects={building} />
           ) : (
-            <EmptyState title="No building or planned projects" />
+            <EmptyState
+              title="No building or planned projects"
+              description="In-progress and planned work will appear here when status is set in content — nothing is invented to fill the section."
+            />
           )}
         </section>
 
-        {completed.length > 0 ? (
-          <section className={styles.block}>
-            <h2 className={styles.blockTitle}>Completed</h2>
-            <ProjectGrid projects={completed} />
-          </section>
-        ) : null}
-
         {archived.length > 0 ? (
           <section className={styles.block}>
-            <h2 className={styles.blockTitle}>Archived</h2>
+            <SectionHeading index="04" label="Archive" title="Archived" />
             <ProjectGrid projects={archived} />
           </section>
         ) : null}

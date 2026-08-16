@@ -10,6 +10,8 @@ html {
   scroll-behavior: smooth;
   overflow-x: clip;
   color-scheme: dark;
+  --pointer-x: 70vw;
+  --pointer-y: 28vh;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -31,10 +33,10 @@ body {
   min-height: 100vh;
   overflow-x: clip;
   background:
-    radial-gradient(ellipse 55% 45% at 88% 18%, rgba(61, 184, 197, 0.1), transparent 55%),
-    radial-gradient(ellipse 40% 35% at 12% 0%, rgba(123, 108, 255, 0.06), transparent 50%),
-    linear-gradient(180deg, #0a1018 0%, var(--color-bg) 32%, #05080d 100%);
-  color: var(--color-fg);
+    radial-gradient(ellipse 42% 34% at 78% 8%, color-mix(in srgb, var(--color-accent) 5%, transparent), transparent 62%),
+    radial-gradient(ellipse 30% 24% at 8% 12%, color-mix(in srgb, var(--color-accent) 3%, transparent), transparent 55%),
+    var(--color-bg);
+  color: var(--color-text-primary);
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: var(--leading-body);
@@ -48,18 +50,32 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.22;
+  opacity: 0.12;
   background-image:
     linear-gradient(rgba(154, 175, 196, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(154, 175, 196, 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 68%);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 58%);
 }
 
-#__next,
-body > * {
-  position: relative;
-  z-index: 1;
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+#contact,
+#about,
+#work,
+#experience,
+#tools,
+#practice {
+  scroll-margin-top: calc(var(--header-height) + var(--announce-height) + 1rem);
 }
 
 img,
@@ -74,6 +90,7 @@ a {
   color: inherit;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 a:hover {
@@ -93,7 +110,7 @@ h4 {
   font-weight: 500;
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-display);
-  color: var(--color-fg);
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -131,37 +148,81 @@ button {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .site-main {
   flex: 1;
-  padding-block: var(--space-5) var(--space-9);
+  padding-block: 0 var(--space-6);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+@media (max-width: 899px) {
+  .site-main {
+    padding-bottom: calc(var(--space-6) + var(--mobile-nav-height));
+  }
 }
 
 @media (max-width: 768px) {
   .site-main {
-    padding-block: var(--space-4) var(--space-8);
+    padding-block: 0 calc(var(--space-5) + var(--mobile-nav-height));
   }
 }
 
-/* Motion utilities */
-.reveal {
-  animation: reveal-up var(--duration-slow) var(--ease-out) both;
+/* ── Layout grid utilities (editorial compositions) ── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
 }
 
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.grid-asymmetric {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+@media (max-width: 900px) {
+  .grid-2,
+  .grid-3,
+  .grid-asymmetric {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    animation: none;
-  }
+/* Subtle scrollbar (WebKit + Firefox) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-fg-subtle) 50%, transparent) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-fg-subtle) 40%, transparent);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-accent) 45%, transparent);
 }

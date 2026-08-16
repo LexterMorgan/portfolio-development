@@ -1,0 +1,29 @@
+.label {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.index {
+  color: var(--color-accent);
+}
+
+.sep {
+  color: var(--color-fg-subtle);
+}
+
+.text {
+  color: var(--color-fg-subtle);
+}
+
+/* Standalone labels (no index) keep the accent signal */
+.solo .text {
+  color: var(--color-accent);
+}

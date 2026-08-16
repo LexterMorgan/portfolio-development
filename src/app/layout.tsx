@@ -1,21 +1,21 @@
-import {
-  Newsreader,
-  Source_Sans_3,
-  IBM_Plex_Mono,
-} from "next/font/google";
+import { Syne, Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
 import { getProfile, getSite } from "@/content";
 import { buildRootMetadata } from "@/lib/metadata";
 import { SiteHeader } from "@/components/navigation/SiteHeader";
 import { SiteFooter } from "@/components/navigation/SiteFooter";
+import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
+import { SiteNoise } from "@/components/ui/SiteNoise";
+import { SiteCursor } from "@/components/ui/SiteCursor";
+import { SiteAtmosphere } from "@/components/ui/SiteAtmosphere";
 import "./globals.css";
 
-const display = Newsreader({
+const display = Syne({
   subsets: ["latin"],
   variable: "--font-display-family",
   display: "swap",
 });
 
-const body = Source_Sans_3({
+const body = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-body-family",
   display: "swap",
@@ -47,6 +47,15 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <body>
+        <SiteAtmosphere />
+        <SiteNoise />
+        <SiteCursor />
+        <AnnouncementBar
+          label={site.data.announcement_label}
+          text={site.data.announcement_text}
+          cta={site.data.announcement_cta}
+          href={site.data.announcement_href}
+        />
         <div className="site-shell">
           <SiteHeader
             brand={brand}

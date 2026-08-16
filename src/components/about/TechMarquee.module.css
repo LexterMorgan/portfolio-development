@@ -1,0 +1,90 @@
+.root {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  border-block: 1px solid var(--color-border);
+  padding-block: 1rem;
+  user-select: none;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  max-width: none;
+  gap: 0.75rem;
+  animation: marquee 42s linear infinite;
+}
+
+.paused .track {
+  animation-play-state: paused;
+}
+
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem 0.6rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  color: var(--color-fg);
+  white-space: nowrap;
+}
+
+.chip img {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+}
+
+.fallback {
+  width: 1rem;
+  height: 1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-accent);
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    justify-content: center;
+    padding-inline: var(--gutter);
+  }
+
+  .root {
+    mask-image: none;
+  }
+
+  .chip:nth-child(n + 20) {
+    display: none;
+  }
+}

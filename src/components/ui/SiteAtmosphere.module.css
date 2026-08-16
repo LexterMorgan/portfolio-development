@@ -1,0 +1,58 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.field {
+  position: absolute;
+  inset: 0;
+  opacity: 0.34;
+}
+
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(38rem, 70vw);
+  height: min(38rem, 70vw);
+  margin-top: calc(min(38rem, 70vw) / -2);
+  margin-left: calc(min(38rem, 70vw) / -2);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 11%, transparent),
+    transparent 68%
+  );
+  transform: translate3d(var(--pointer-x, 70vw), var(--pointer-y, 28vh), 0);
+  will-change: transform;
+  opacity: 0.85;
+}
+
+@media (max-width: 1024px) {
+  .field {
+    opacity: 0.26;
+  }
+}
+
+@media (pointer: coarse) {
+  .field {
+    opacity: 0.22;
+  }
+
+  .glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field {
+    opacity: 0.2;
+  }
+
+  .glow {
+    display: none;
+  }
+}

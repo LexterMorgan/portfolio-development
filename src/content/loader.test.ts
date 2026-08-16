@@ -17,18 +17,20 @@ describe("content loader (repository content)", () => {
   });
 
   it("loads all scaffolded projects with stable slugs", async () => {
-    const { getAllProjects } = await import("@/content/loader");
+    const { getAllProjects, getCompletedProjects } = await import(
+      "@/content/loader"
+    );
     const projects = getAllProjects();
-    const slugs = projects.map((p) => p.data.slug).sort();
-    expect(slugs).toEqual([
+    expect(projects.map((p) => p.data.slug)).toEqual([
       "customer-retention",
       "ecommerce-power-shift",
       "folu-executive-intelligence",
       "retailiq",
     ]);
+    expect(getCompletedProjects()).toHaveLength(4);
     for (const project of projects) {
-      expect(project.data.status).toBe("planned");
-      expect(project.data.featured).toBe(false);
+      expect(project.data.status).toBe("completed");
+      expect(project.data.featured).toBe(true);
       expect(project.articleSlugs).toEqual([]);
     }
   });
@@ -47,15 +49,29 @@ describe("content loader (repository content)", () => {
     expect(result.articles).toBe(0);
   });
 
-  it("derives selected/building helpers without inventing featured flags", async () => {
+  it("derives selected/building helpers from featured and status flags", async () => {
     const {
       getSelectedProjects,
       getBuildingProjects,
       getPublishedArticles,
     } = await import("@/content/loader");
-    expect(getSelectedProjects()).toHaveLength(0);
-    expect(getBuildingProjects().length).toBe(4);
+    expect(getSelectedProjects()).toHaveLength(4);
+    expect(getBuildingProjects().length).toBe(0);
     expect(getPublishedArticles()).toHaveLength(0);
+  });
+
+  it("maps each completed project to a direct repository URL", async () => {
+    const { getCompletedProjects } = await import("@/content/loader");
+    const projects = getCompletedProjects();
+    expect(projects).toHaveLength(4);
+    for (const project of projects) {
+      expect(project.data.links.github).toMatch(
+        /^https:\/\/github\.com\/LexterMorgan\/.+/,
+      );
+      expect(project.data.links.github).not.toBe(
+        "https://github.com/LexterMorgan",
+      );
+    }
   });
 });
 

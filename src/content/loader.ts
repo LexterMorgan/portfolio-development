@@ -12,6 +12,7 @@ import {
   ExperienceFrontmatterSchema,
   ProfileFrontmatterSchema,
   ProjectFrontmatterSchema,
+  RecognitionFrontmatterSchema,
   SkillsFrontmatterSchema,
   SiteFrontmatterSchema,
   UpdateFrontmatterSchema,
@@ -25,11 +26,12 @@ import {
   type ProjectDocument,
   type ProjectFrontmatter,
   type ProjectStatus,
+  type RecognitionFrontmatter,
   type SkillsFrontmatter,
   type SiteFrontmatter,
   type UpdateFrontmatter,
 } from "./types";
-import { assertTechStackRegistered } from "./tech-registry";
+import { assertTechStackRegistered, getTech } from "./tech-registry";
 
 export const CONTENT_ROOT = path.join(process.cwd(), "content");
 
@@ -102,6 +104,13 @@ export function getSkills(): MarkdownDocument<SkillsFrontmatter> {
   );
 }
 
+export function getRecognition(): MarkdownDocument<RecognitionFrontmatter> {
+  return parseMarkdown(
+    path.join(CONTENT_ROOT, "recognition.md"),
+    RecognitionFrontmatterSchema,
+  );
+}
+
 export function getSite(): MarkdownDocument<SiteFrontmatter> {
   return parseMarkdown(path.join(CONTENT_ROOT, "site.md"), SiteFrontmatterSchema);
 }
@@ -139,7 +148,14 @@ export function getProject(slug: string): ProjectDocument {
 
 export function getAllProjects(): ProjectDocument[] {
   const root = path.join(CONTENT_ROOT, "projects");
-  return listDirectories(root).map((slug) => getProject(slug));
+  return listDirectories(root)
+    .map((slug) => getProject(slug))
+    .sort((a, b) => {
+      const ao = a.data.order ?? Number.MAX_SAFE_INTEGER;
+      const bo = b.data.order ?? Number.MAX_SAFE_INTEGER;
+      if (ao !== bo) return ao - bo;
+      return a.data.slug.localeCompare(b.data.slug);
+    });
 }
 
 export function getProjectsByStatus(status: ProjectStatus): ProjectDocument[] {
@@ -252,6 +268,39 @@ export function getAllUpdates(): MarkdownDocument<UpdateFrontmatter>[] {
 }
 
 /**
+ * Unique technology display names verified via skills + project stacks.
+ * Never invents popular tools — empty when content has no registered IDs.
+ */
+export function getVerifiedTechLabels(): string[] {
+  const labels = new Set<string>();
+
+  for (const group of getSkills().data.groups) {
+    for (const id of group.technologies) {
+      const tech = getTech(id);
+      if (tech) labels.add(tech.name);
+    }
+  }
+
+  for (const project of getAllProjects()) {
+    for (const ids of Object.values(project.data.tech_stack)) {
+      for (const id of ids ?? []) {
+        const tech = getTech(id);
+        if (tech) labels.add(tech.name);
+      }
+    }
+  }
+
+  for (const entry of getExperience().data.entries) {
+    for (const id of entry.technologies) {
+      const tech = getTech(id);
+      if (tech) labels.add(tech.name);
+    }
+  }
+
+  return Array.from(labels).sort((a, b) => a.localeCompare(b));
+}
+
+/**
  * Full-content validation for CI / local scripts.
  * Throws on the first hard failure; collectors can wrap if needed.
  */
@@ -264,6 +313,7 @@ export function validateAllContent(): {
   getExperience();
   getEducation();
   getSkills();
+  getRecognition();
   getSite();
   getCurrently();
   const projects = getAllProjects();
@@ -275,6 +325,26 @@ export function validateAllContent(): {
   for (const project of projects) {
     for (const articleSlug of project.data.articles) {
       getArticle(project.data.slug, articleSlug);
+    }
+  }
+
+  // Experience / skills tech IDs must exist in the registry when listed.
+  for (const entry of getExperience().data.entries) {
+    for (const id of entry.technologies) {
+      if (!getTech(id)) {
+        throw new Error(
+          `experience entry "${entry.id}": technology "${id}" is not in TECH_REGISTRY`,
+        );
+      }
+    }
+  }
+  for (const group of getSkills().data.groups) {
+    for (const id of group.technologies) {
+      if (!getTech(id)) {
+        throw new Error(
+          `skills group "${group.id}": technology "${id}" is not in TECH_REGISTRY`,
+        );
+      }
     }
   }
 
@@ -292,6 +362,7 @@ export type {
   ExperienceFrontmatter,
   ProfileFrontmatter,
   ProjectFrontmatter,
+  RecognitionFrontmatter,
   SkillsFrontmatter,
   SiteFrontmatter,
   UpdateFrontmatter,

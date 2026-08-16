@@ -75,6 +75,10 @@ export const FindingSchema = z.object({
   summary: z.string().min(1),
   evidence: EvidenceCategorySchema.default("unknown"),
   source: z.string().optional(),
+  /** Optional highlighted metric for case-study KPI presentation */
+  metric: z.string().optional(),
+  /** Short label paired with metric */
+  label: z.string().optional(),
 });
 export type Finding = z.infer<typeof FindingSchema>;
 
@@ -85,6 +89,8 @@ export const ProjectFrontmatterSchema = z.object({
   category: z.string().optional(),
   status: ProjectStatusSchema,
   featured: z.boolean().default(false),
+  /** Display order on Projects index (lower first). */
+  order: z.number().int().positive().optional(),
   /** ISO date or year string when known; omit if unknown. */
   date: z.string().optional(),
   year: z.number().int().optional(),
@@ -143,6 +149,22 @@ export const ExperienceEntrySchema = z.object({
   end: z.string().optional(),
   summary: z.string().optional(),
   highlights: z.array(z.string()).default([]),
+  /** Canonical tech IDs when verified for the role. */
+  technologies: z.array(z.string()).default([]),
+  /**
+   * Role-specific practice groups derived from sourced highlights
+   * (e.g. Analysis / Reporting) — not a dump of the global stack.
+   */
+  practice_groups: z
+    .array(
+      z.object({
+        label: z.string().min(1),
+        items: z.array(z.string().min(1)).default([]),
+      }),
+    )
+    .default([]),
+  /** Optional image path under /public when a sourced asset exists. */
+  image: z.string().optional(),
   /** primary = data/analytics/BI focus; additional = broader professional context */
   layer: ExperienceLayerSchema.default("primary"),
 });
@@ -161,6 +183,9 @@ export const EducationEntrySchema = z.object({
   start: z.string().optional(),
   end: z.string().optional(),
   summary: z.string().optional(),
+  /** Sourced academic highlights only — never invent GPA/awards. */
+  highlights: z.array(z.string()).default([]),
+  logo: z.string().optional(),
 });
 export type EducationEntry = z.infer<typeof EducationEntrySchema>;
 
@@ -168,6 +193,24 @@ export const EducationFrontmatterSchema = z.object({
   entries: z.array(EducationEntrySchema).default([]),
 });
 export type EducationFrontmatter = z.infer<typeof EducationFrontmatterSchema>;
+
+export const RecognitionKindSchema = z.enum(["award", "certification"]);
+export type RecognitionKind = z.infer<typeof RecognitionKindSchema>;
+
+export const RecognitionEntrySchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  issuer: z.string().optional(),
+  year: z.union([z.string(), z.number()]).optional(),
+  url: z.string().url().optional(),
+  kind: RecognitionKindSchema.default("certification"),
+});
+export type RecognitionEntry = z.infer<typeof RecognitionEntrySchema>;
+
+export const RecognitionFrontmatterSchema = z.object({
+  entries: z.array(RecognitionEntrySchema).default([]),
+});
+export type RecognitionFrontmatter = z.infer<typeof RecognitionFrontmatterSchema>;
 
 export const SkillGroupSchema = z.object({
   id: z.string().min(1),
@@ -186,6 +229,10 @@ export const SiteFrontmatterSchema = z.object({
   title: z.string().min(1),
   description: z.string().optional(),
   language: z.string().default("en"),
+  announcement_label: z.string().optional(),
+  announcement_text: z.string().optional(),
+  announcement_cta: z.string().optional(),
+  announcement_href: z.string().optional(),
 });
 export type SiteFrontmatter = z.infer<typeof SiteFrontmatterSchema>;
 

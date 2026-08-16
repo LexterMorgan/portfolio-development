@@ -5,6 +5,12 @@
   margin-top: auto;
 }
 
+@media (max-width: 899px) {
+  .footer {
+    padding-bottom: calc(var(--space-6) + var(--mobile-nav-height));
+  }
+}
+
 .inner {
   display: grid;
   grid-template-columns: 1.2fr 1fr;

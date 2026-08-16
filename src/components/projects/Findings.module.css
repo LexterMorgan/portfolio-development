@@ -1,3 +1,36 @@
+.wrap {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.metrics {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--space-3);
+}
+
+.metric {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.metricValue {
+  font-family: var(--font-mono);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  letter-spacing: var(--tracking-label);
+  color: var(--color-accent);
+}
+
+.metricLabel {
+  font-size: var(--text-meta);
+  color: var(--color-fg-muted);
+  line-height: 1.4;
+}
+
 .list {
   list-style: none;
   display: grid;

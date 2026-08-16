@@ -1,7 +1,41 @@
 ---
-# Technologies are canonical registry IDs — not proficiency percentages.
-# Only list technologies verified from source material.
-groups: []
+groups:
+  - id: programming
+    label: "Programming"
+    technologies:
+      - python
+      - sql
+      - r
+      - typescript
+  - id: data-analytics
+    label: "Data & Analytics"
+    technologies:
+      - pandas
+      - numpy
+      - scikitlearn
+  - id: databases
+    label: "Databases"
+    technologies:
+      - postgresql
+      - mysql
+      - mongodb
+  - id: bi-visualization
+    label: "BI & Visualization"
+    technologies:
+      - powerbi
+      - tableau
+      - excel
+      - lookerstudio
+      - matplotlib
+      - recharts
+  - id: web-tools
+    label: "Web & Tools"
+    technologies:
+      - react
+      - nextjs
+      - vite
+      - git
+      - vercel
 ---
 
-Skill groups intentionally empty until verified against CV / project repositories.
+Technical proficiencies sourced from CV_v2 and verified against project repositories.

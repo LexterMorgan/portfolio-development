@@ -12,11 +12,12 @@ type SiteFooterProps = {
 };
 
 export function SiteFooter({ title, email, links }: SiteFooterProps) {
+  const year = new Date().getFullYear();
+
   return (
     <footer className={styles.footer}>
       <Container width="wide" className={styles.inner}>
         <div className={styles.brandBlock}>
-          <p className={styles.eyebrow}>Contact</p>
           <p className={styles.title}>{title}</p>
           <p className={styles.copy}>
             Data Science · Data Analytics · Business Intelligence
@@ -28,16 +29,13 @@ export function SiteFooter({ title, email, links }: SiteFooterProps) {
             <p className={styles.colLabel}>Navigate</p>
             <ul className={styles.list}>
               <li>
-                <Link href="/projects">Work</Link>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/projects">Projects</Link>
               </li>
               <li>
                 <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/articles">Articles</Link>
-              </li>
-              <li>
-                <Link href="/#currently">Currently</Link>
               </li>
             </ul>
           </div>
@@ -74,9 +72,7 @@ export function SiteFooter({ title, email, links }: SiteFooterProps) {
         </div>
       </Container>
       <Container width="wide" className={styles.bottom}>
-        <p className={styles.note}>
-          Content-driven portfolio · claims remain source-traceable
-        </p>
+        <p className={styles.note}>© {year} {title}</p>
       </Container>
     </footer>
   );

@@ -1,0 +1,107 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 80;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+}
+
+.root[data-visible="true"] {
+  opacity: 1;
+}
+
+.dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 70%, transparent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  transform: translate(-50%, -50%);
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background: transparent;
+  opacity: 0.45;
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.86);
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.root[data-state="hot"] .ring {
+  opacity: 0.78;
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  transform: translate(-50%, -50%) scale(1.28);
+}
+
+.root[data-state="card"] .ring {
+  opacity: 0.7;
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  transform: translate(-50%, -50%) scale(1.42);
+}
+
+.root[data-state="explore"] .dot {
+  opacity: 0;
+}
+
+.root[data-state="explore"] .ring {
+  opacity: 0.88;
+  border-color: color-mix(in srgb, var(--accent) 75%, transparent);
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  transform: translate(-50%, -50%) scale(2.05);
+}
+
+.root[data-state="explore"] .label {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (pointer: coarse) {
+  .root {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    display: none;
+  }
+}

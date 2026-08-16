@@ -1,0 +1,18 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.045;
+  mix-blend-mode: soft-light;
+  contain: strict;
+}
+
+.root :global(.noise-overlay) {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none;
+}
