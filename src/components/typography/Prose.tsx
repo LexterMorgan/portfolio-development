@@ -1,4 +1,4 @@
-import styles from "./prose.module.css";
+import styles from "./Prose.module.css";
 
 /** Shared article / long-form reading styles. */
 export function Prose({ children }: { children: React.ReactNode }) {
