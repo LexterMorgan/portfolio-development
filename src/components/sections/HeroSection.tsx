@@ -53,11 +53,12 @@ export function HeroSection({
             <p className={`${styles.name} ${styles.enter} ${styles.d1}`}>{name}</p>
           ) : null}
 
-          <h1 id="home-hero-title" className={`${styles.title} ${styles.enter} ${styles.d2}`}>
+          <h1 id="home-hero-title" className={styles.title}>
             {lines.map((line, i) => (
               <span
                 key={line}
-                className={i === Math.min(1, lines.length - 1) ? styles.lineAccent : styles.line}
+                style={{ animationDelay: `${140 + i * 120}ms` }}
+                className={`${i === Math.min(1, lines.length - 1) ? styles.lineAccent : styles.line} ${styles.lineEnter}`}
               >
                 {line}
               </span>

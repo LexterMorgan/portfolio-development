@@ -23,6 +23,12 @@
     color-mix(in srgb, var(--accent) 7%, transparent),
     transparent 72%
   );
+  animation: washDrift 14s var(--ease-in-out) infinite;
+}
+
+@keyframes washDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(2.5%, 2%, 0) scale(1.08); }
 }
 
 .copy {
@@ -195,8 +201,13 @@
   animation: heroIn 800ms var(--ease-out) forwards;
 }
 
+.lineEnter {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: heroIn 700ms var(--ease-out) forwards;
+}
+
 .d1 { animation-delay: 60ms; }
-.d2 { animation-delay: 140ms; }
 .d3 { animation-delay: 280ms; }
 .d35 { animation-delay: 340ms; }
 .d4 { animation-delay: 400ms; }
@@ -236,13 +247,18 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .enter {
+  .enter,
+  .lineEnter {
     opacity: 1;
     transform: none;
     animation: none;
   }
 
   .dot {
+    animation: none;
+  }
+
+  .wash {
     animation: none;
   }
 }

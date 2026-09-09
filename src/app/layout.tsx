@@ -44,6 +44,7 @@ export default function RootLayout({
     <html
       lang={site.data.language || "en"}
       className={`${display.variable} ${body.variable} ${mono.variable}`}
+      suppressHydrationWarning
     >
       <body>
         <script
