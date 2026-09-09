@@ -13,6 +13,9 @@ describe("content loader (repository content)", () => {
     const { getSite, getProfile, getCurrently } = await import("@/content/loader");
     expect(getSite().data.title).toBeTruthy();
     expect(getProfile().data.headline).toContain("Data Science");
+    expect(getProfile().data.hero_title_lines).toHaveLength(2);
+    expect(getProfile().data.hero_lede).toBeTruthy();
+    expect(getProfile().data.hero_facts).toHaveLength(3);
     expect(getCurrently().data.building).toEqual([]);
   });
 

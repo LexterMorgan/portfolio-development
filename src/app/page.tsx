@@ -45,6 +45,7 @@ export default function HomePage() {
   const recognition = getRecognition().data.entries;
 
   const heroBody =
+    profile.data.hero_lede ||
     "Data Science graduate based in Jakarta — statistical analysis, data modeling, ETL, and analytical programming across customer analytics, commercial BI, market research, and communication intelligence.";
 
   const aboutBody =
@@ -58,6 +59,8 @@ export default function HomePage() {
         name={profile.data.name}
         location={profile.data.location}
         body={heroBody}
+        titleLines={profile.data.hero_title_lines}
+        facts={profile.data.hero_facts}
         links={profile.data.links}
         email={profile.data.email}
       />

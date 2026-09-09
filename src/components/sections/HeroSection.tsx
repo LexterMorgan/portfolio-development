@@ -8,6 +8,10 @@ type HeroSectionProps = {
   name?: string;
   location?: string;
   body?: string;
+  /** Editorial H1 lines from content/profile.md (hero_title_lines). */
+  titleLines?: string[];
+  /** Sourced credibility facts (hero_facts) rendered as mono chips. */
+  facts?: string[];
   links?: {
     github?: string;
     linkedin?: string;
@@ -17,14 +21,23 @@ type HeroSectionProps = {
 
 /**
  * Home hero — positioning only. Tech stack lives on About and Projects.
+ * Title lines, lede, and facts come from content; falls back to the
+ * profile headline split when hero fields are absent.
  */
 export function HeroSection({
   name,
   location,
   body,
+  titleLines,
+  facts,
   links,
   email,
 }: HeroSectionProps) {
+  const lines =
+    titleLines && titleLines.length > 0
+      ? titleLines
+      : ["Data Science Graduate", "Business Intelligence", "Data Analyst"];
+
   return (
     <section className={styles.hero} aria-labelledby="home-hero-title">
       <div className={styles.wash} aria-hidden />
@@ -41,20 +54,30 @@ export function HeroSection({
           ) : null}
 
           <h1 id="home-hero-title" className={`${styles.title} ${styles.enter} ${styles.d2}`}>
-            <span className={styles.line}>Data Science Graduate</span>
-            <span className={styles.amp} aria-hidden>
-              &amp;
-            </span>
-            <span className={styles.lineAccent}>Business Intelligence</span>
-            <span className={styles.amp} aria-hidden>
-              &amp;
-            </span>
-            <span className={styles.line}>Data Analyst</span>
+            {lines.map((line, i) => (
+              <span
+                key={line}
+                className={i === Math.min(1, lines.length - 1) ? styles.lineAccent : styles.line}
+              >
+                {line}
+              </span>
+            ))}
           </h1>
 
           <p className={`${styles.lede} ${styles.enter} ${styles.d3}`}>
             {body?.trim()}
           </p>
+
+          {facts && facts.length > 0 ? (
+            <ul className={`${styles.facts} ${styles.enter} ${styles.d35}`}>
+              {facts.map((fact) => (
+                <li key={fact} className={styles.fact}>
+                  <span className={styles.factDot} aria-hidden />
+                  {fact}
+                </li>
+              ))}
+            </ul>
+          ) : null}
 
           <div className={`${styles.actions} ${styles.enter} ${styles.d4}`}>
             <MagneticCta>

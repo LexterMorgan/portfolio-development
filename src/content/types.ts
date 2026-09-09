@@ -134,6 +134,12 @@ export const ProfileFrontmatterSchema = z.object({
       website: z.string().url().optional(),
     })
     .default({}),
+  /** Hero display lines (editorial H1). Falls back to component default when empty. */
+  hero_title_lines: z.array(z.string().min(1)).default([]),
+  /** Hero lede paragraph. Falls back to profile body when omitted. */
+  hero_lede: z.string().optional(),
+  /** Sourced credibility facts rendered as mono chips under the hero lede. */
+  hero_facts: z.array(z.string().min(1)).default([]),
 });
 export type ProfileFrontmatter = z.infer<typeof ProfileFrontmatterSchema>;
 
