@@ -1,15 +1,10 @@
-"use client";
-
-import { useEffect } from "react";
+import { permanentRedirect } from "next/navigation";
 
 /**
- * Contact is part of About. Keep the route so old links still resolve,
- * including the #contact hash (server redirects drop fragments).
+ * Contact is part of About. Permanent redirect so old links resolve.
+ * Note: browsers drop URL fragments across 3xx, so the #contact hash
+ * is handled by the anchor on /about (id="contact").
  */
 export default function ContactRedirect() {
-  useEffect(() => {
-    window.location.replace("/about#contact");
-  }, []);
-
-  return null;
+  permanentRedirect("/about");
 }

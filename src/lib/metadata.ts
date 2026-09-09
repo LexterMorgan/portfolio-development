@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getSite } from "@/content";
 
+const SITE_URL = "https://michaelalexander.vercel.app";
 const fallbackTitle = "Portfolio";
 const fallbackDescription =
   "Data Science Graduate | Data Analytics | Business Intelligence";
@@ -19,6 +20,7 @@ export function getSiteMetadataBase(): {
 export function buildRootMetadata(): Metadata {
   const { title, description } = getSiteMetadataBase();
   return {
+    metadataBase: new URL(SITE_URL),
     title: {
       default: title,
       template: `%s · ${title}`,
@@ -36,11 +38,13 @@ export function buildRootMetadata(): Metadata {
       description,
       type: "website",
       locale: "en_US",
+      images: ["/og-image.png"],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: ["/og-image.png"],
     },
   };
 }
@@ -59,11 +63,13 @@ export function buildPageMetadata(input: {
       title: `${input.title} · ${site.title}`,
       description,
       type: "website",
+      images: ["/og-image.png"],
     },
     twitter: {
       card: "summary_large_image",
       title: `${input.title} · ${site.title}`,
       description,
+      images: ["/og-image.png"],
     },
     alternates: input.path
       ? {
