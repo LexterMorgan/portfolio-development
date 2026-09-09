@@ -147,3 +147,35 @@
     --duration-editorial: 0ms;
   }
 }
+
+/* ── Light palette — aliases (var-referencing tokens) inherit automatically ── */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #f5f7fa;
+  --color-bg-subtle: #eef1f6;
+  --color-bg-elevated: #e8edf3;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f0f4f8;
+  --color-surface-elevated: #f8fafc;
+
+  --color-fg: #0a1018;
+  --color-fg-muted: #4b5563;
+  --color-fg-subtle: #6b7280;
+  --color-fg-disabled: #9ca3af;
+
+  /* Darker cyan for AA contrast on light bg */
+  --accent: #0e7d8a;
+  --color-accent-hover: #0a6a75;
+  --color-accent-fg: #f5f7fa;
+
+  --color-border: rgba(10, 16, 24, 0.12);
+  --color-border-subtle: rgba(10, 16, 24, 0.07);
+  --color-border-strong: rgba(10, 16, 24, 0.2);
+
+  --shadow-xs: 0 1px 0 rgba(255, 255, 255, 0.5);
+  --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.1);
+  --shadow-frame: var(--shadow-xs), 0 20px 48px rgba(15, 23, 42, 0.14);
+
+  --color-overlay: rgba(245, 247, 250, 0.72);
+}

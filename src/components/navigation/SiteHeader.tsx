@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MagneticCta } from "@/components/ui/MagneticCta";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import styles from "./SiteHeader.module.css";
 
 const NAV = [
@@ -121,6 +122,7 @@ export function SiteHeader({ brand }: SiteHeaderProps) {
           </nav>
 
           <div className={styles.aside}>
+            <ThemeToggle />
             <MagneticCta>
               <Link href="/about#contact" className={styles.cta} data-cursor="hot">
                 Let&apos;s Talk
