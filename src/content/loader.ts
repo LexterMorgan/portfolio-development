@@ -162,10 +162,6 @@ export function getProjectsByStatus(status: ProjectStatus): ProjectDocument[] {
   return getAllProjects().filter((p) => p.data.status === status);
 }
 
-export function getFeaturedProjects(): ProjectDocument[] {
-  return getAllProjects().filter((p) => p.data.featured);
-}
-
 export function getArticle(
   projectSlug: string,
   articleSlug: string,

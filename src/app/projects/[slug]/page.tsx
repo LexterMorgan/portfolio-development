@@ -100,6 +100,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               title={data.title}
               src={data.hero || data.thumbnail}
               variant="hero"
+              priority
             />
           </Reveal>
         </Container>
@@ -126,6 +127,19 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <p>{w1h.what}</p>
           </section>
         ) : null}
+
+        <section className={styles.section}>
+          <p className={styles.sectionEyebrow}>04 / Objectives</p>
+          <h2>Objectives</h2>
+          {w1h.what ? (
+            <p>{w1h.what}</p>
+          ) : (
+            <EmptyState
+              title="Objectives pending"
+              description="Clear goals will be added when sourced."
+            />
+          )}
+        </section>
 
         {!hasContext && !hasProblem ? (
           <section className={styles.section}>
@@ -171,17 +185,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </section>
 
         <section className={styles.section}>
-          <p className={styles.sectionEyebrow}>08 / Preview</p>
-          <h2>Visual preview</h2>
-          <ProjectPreview
-            title={data.title}
-            src={data.hero || data.thumbnail}
-            variant="featured"
-          />
-        </section>
-
-        <section className={styles.section}>
-          <p className={styles.sectionEyebrow}>09 / Findings</p>
+          <p className={styles.sectionEyebrow}>08 / Findings</p>
           <h2>Findings / Insights</h2>
           {data.findings.length > 0 ? (
             <FindingsList findings={data.findings} />
@@ -195,7 +199,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
         {data.limitations.length > 0 ? (
           <section className={styles.section}>
-            <p className={styles.sectionEyebrow}>Data / Methodology / Limitations</p>
+            <p className={styles.sectionEyebrow}>09 / Limitations</p>
             <h2>Limitations</h2>
             <LimitationsList limitations={data.limitations} />
           </section>
@@ -216,7 +220,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
         {articles.length > 0 ? (
           <section className={styles.section}>
-            <p className={styles.sectionEyebrow}>Insights</p>
+            <p className={styles.sectionEyebrow}>11 / Insights</p>
             <h2>Related articles</h2>
             {articles.map((article) => (
               <ArticleCard key={article.data.slug} article={article} />
@@ -226,7 +230,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
         {next && next.data.slug !== data.slug ? (
           <section className={styles.next}>
-            <p className={styles.sectionEyebrow}>11 / Next Project</p>
+            <p className={styles.sectionEyebrow}>12 / Next Project</p>
             <h2 className={styles.nextTitle}>
               <Link href={`/projects/${next.data.slug}`}>{next.data.title}</Link>
             </h2>

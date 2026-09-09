@@ -78,3 +78,10 @@
   font-size: var(--text-meta);
   color: var(--color-fg-subtle);
 }
+
+.legend {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-fg-subtle);
+}

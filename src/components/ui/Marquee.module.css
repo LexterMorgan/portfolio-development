@@ -59,3 +59,20 @@
     display: none;
   }
 }
+
+/* Coarse pointers (touch): decorative motion off, band stays faintly visible. */
+@media (pointer: coarse) {
+  .track {
+    animation: none;
+    transform: none;
+  }
+
+  .root {
+    opacity: 0.3;
+    mask-image: none;
+  }
+
+  .text:last-child {
+    display: none;
+  }
+}

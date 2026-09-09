@@ -37,6 +37,10 @@ export function FindingsList({ findings }: { findings: Finding[] }) {
           </li>
         ))}
       </ul>
+
+      <p className={styles.legend}>
+        Legend: observed = read from source; derived = computed from source data.
+      </p>
     </div>
   );
 }

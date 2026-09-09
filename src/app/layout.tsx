@@ -4,7 +4,6 @@ import { buildRootMetadata } from "@/lib/metadata";
 import { SiteHeader } from "@/components/navigation/SiteHeader";
 import { SiteFooter } from "@/components/navigation/SiteFooter";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
-import { SiteNoise } from "@/components/ui/SiteNoise";
 import { SiteCursor } from "@/components/ui/SiteCursor";
 import { SiteAtmosphere } from "@/components/ui/SiteAtmosphere";
 import "./globals.css";
@@ -48,7 +47,6 @@ export default function RootLayout({
     >
       <body>
         <SiteAtmosphere />
-        <SiteNoise />
         <SiteCursor />
         <AnnouncementBar
           label={site.data.announcement_label}

@@ -10,6 +10,7 @@ type ProjectPreviewProps = {
   src?: string;
   alt?: string;
   variant?: "hero" | "card" | "featured";
+  priority?: boolean;
 };
 
 export function ProjectPreview({
@@ -17,6 +18,7 @@ export function ProjectPreview({
   src,
   alt,
   variant = "card",
+  priority = false,
 }: ProjectPreviewProps) {
   const frameRef = useRef<HTMLDivElement>(null);
   const { allowPointerEffects } = useMotionPreferences();
@@ -73,6 +75,7 @@ export function ProjectPreview({
         height={1000}
         className={styles.image}
         sizes="(max-width: 768px) 100vw, 80vw"
+        priority={priority}
       />
     </div>
   );
