@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getSite } from "@/content";
 
-const SITE_URL = "https://michaelalexander.vercel.app";
+export const SITE_URL = "https://michaelalexander.vercel.app";
 const fallbackTitle = "Portfolio";
 const fallbackDescription =
   "Data Science Graduate | Data Analytics | Business Intelligence";
@@ -53,9 +53,11 @@ export function buildPageMetadata(input: {
   title: string;
   description?: string;
   path?: string;
+  image?: string;
 }): Metadata {
   const site = getSiteMetadataBase();
   const description = input.description || site.description;
+  const images = [input.image || "/og-image.png"];
   return {
     title: input.title,
     description,
@@ -63,13 +65,13 @@ export function buildPageMetadata(input: {
       title: `${input.title} · ${site.title}`,
       description,
       type: "website",
-      images: ["/og-image.png"],
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title: `${input.title} · ${site.title}`,
       description,
-      images: ["/og-image.png"],
+      images,
     },
     alternates: input.path
       ? {

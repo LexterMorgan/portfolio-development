@@ -45,6 +45,7 @@ export async function generateMetadata({ params }: PageProps) {
       project.data.subtitle ||
       "Analytical project case study.",
     path: `/projects/${slug}`,
+    image: project.data.hero || project.data.thumbnail,
   });
 }
 
