@@ -9,7 +9,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
-  color-scheme: dark light;
+  color-scheme: light;
   --pointer-x: 70vw;
   --pointer-y: 28vh;
 }
@@ -32,10 +32,7 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow-x: clip;
-  background:
-    radial-gradient(ellipse 42% 34% at 78% 8%, color-mix(in srgb, var(--color-accent) 5%, transparent), transparent 62%),
-    radial-gradient(ellipse 30% 24% at 8% 12%, color-mix(in srgb, var(--color-accent) 3%, transparent), transparent 55%),
-    var(--color-bg);
+  background: linear-gradient(118deg, #b2f4e8 0%, #4ad6d6 42%, #1aa8ca 78%, #0e80b6 100%) fixed;
   color: var(--color-text-primary);
   font-family: var(--font-body);
   font-size: var(--text-body);

@@ -40,6 +40,12 @@
   min-width: 0;
   position: relative;
   z-index: 1;
+  padding: clamp(1rem, 1.6vw, 1.5rem) clamp(1.1rem, 2vw, 1.7rem);
+  background: var(--frost-bg);
+  border: var(--frost-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(var(--frost-blur)) saturate(1.3);
+  box-shadow: var(--frost-shadow);
 }
 
 .index {

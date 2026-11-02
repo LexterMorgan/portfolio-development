@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/navigation/SiteFooter";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
 import { SiteCursor } from "@/components/ui/SiteCursor";
 import { SiteAtmosphere } from "@/components/ui/SiteAtmosphere";
+import { MotionProvider } from "@/components/ui/MotionProvider";
 import "./globals.css";
 
 const display = Syne({
@@ -47,12 +48,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              '(function(){try{var t=localStorage.getItem("portfolio-theme");if(!t){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}})()',
-          }}
-        />
+        <MotionProvider>
         <SiteAtmosphere />
         <SiteCursor />
         <AnnouncementBar
@@ -76,6 +72,7 @@ export default function RootLayout({
             links={profile.data.links}
           />
         </div>
+        </MotionProvider>
       </body>
     </html>
   );

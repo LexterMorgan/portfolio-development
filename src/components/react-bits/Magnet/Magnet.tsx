@@ -1,7 +1,6 @@
 "use client";
 
 import React, {
-  useState,
   useEffect,
   useRef,
   type ReactNode,
@@ -34,22 +33,63 @@ const Magnet: React.FC<MagnetProps> = ({
   innerClassName = "",
   ...props
 }) => {
-  const [isActive, setIsActive] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const magnetRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const magnet = magnetRef.current;
+    const inner = innerRef.current;
+    if (!magnet || !inner) return;
+
+    let frame = 0;
+    let running = true;
+    let active = false;
+    const target = { x: 0, y: 0 };
+    const position = { x: 0, y: 0 };
+
+    const schedule = () => {
+      if (frame === 0) frame = window.requestAnimationFrame(tick);
+    };
+
+    const setTarget = (x: number, y: number, nextActive: boolean) => {
+      target.x = x;
+      target.y = y;
+      if (active !== nextActive) {
+        active = nextActive;
+        inner.style.transition = active
+          ? activeTransition
+          : inactiveTransition;
+      }
+      schedule();
+    };
+
+    const tick = () => {
+      frame = 0;
+      if (!running) return;
+      position.x += (target.x - position.x) * 0.2;
+      position.y += (target.y - position.y) * 0.2;
+      inner.style.transform = `translate3d(${position.x}px, ${position.y}px, 0)`;
+
+      if (
+        Math.abs(target.x - position.x) > 0.08 ||
+        Math.abs(target.y - position.y) > 0.08
+      ) {
+        schedule();
+      } else {
+        position.x = target.x;
+        position.y = target.y;
+        inner.style.transform = `translate3d(${position.x}px, ${position.y}px, 0)`;
+      }
+    };
+
     if (disabled) {
-      setPosition({ x: 0, y: 0 });
-      setIsActive(false);
+      inner.style.transition = inactiveTransition;
+      inner.style.transform = "translate3d(0, 0, 0)";
       return;
     }
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!magnetRef.current) return;
-
-      const { left, top, width, height } =
-        magnetRef.current.getBoundingClientRect();
+      const { left, top, width, height } = magnet.getBoundingClientRect();
       const centerX = left + width / 2;
       const centerY = top + height / 2;
 
@@ -57,23 +97,25 @@ const Magnet: React.FC<MagnetProps> = ({
       const distY = Math.abs(centerY - e.clientY);
 
       if (distX < width / 2 + padding && distY < height / 2 + padding) {
-        setIsActive(true);
         const offsetX = (e.clientX - centerX) / magnetStrength;
         const offsetY = (e.clientY - centerY) / magnetStrength;
-        setPosition({ x: offsetX, y: offsetY });
+        setTarget(offsetX, offsetY, true);
       } else {
-        setIsActive(false);
-        setPosition({ x: 0, y: 0 });
+        setTarget(0, 0, false);
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    inner.style.transition = inactiveTransition;
+    inner.style.willChange = "transform";
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => {
+      running = false;
+      window.cancelAnimationFrame(frame);
+      inner.style.transform = "translate3d(0, 0, 0)";
+      inner.style.willChange = "auto";
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [padding, disabled, magnetStrength]);
-
-  const transitionStyle = isActive ? activeTransition : inactiveTransition;
+  }, [activeTransition, inactiveTransition, padding, disabled, magnetStrength]);
 
   return (
     <div
@@ -82,14 +124,7 @@ const Magnet: React.FC<MagnetProps> = ({
       style={{ position: "relative", display: "inline-block" }}
       {...props}
     >
-      <div
-        className={innerClassName}
-        style={{
-          transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-          transition: transitionStyle,
-          willChange: disabled ? undefined : "transform",
-        }}
-      >
+      <div ref={innerRef} className={innerClassName}>
         {children}
       </div>
     </div>

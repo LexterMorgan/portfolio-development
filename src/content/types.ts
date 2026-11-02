@@ -140,6 +140,10 @@ export const ProfileFrontmatterSchema = z.object({
   hero_lede: z.string().optional(),
   /** Sourced credibility facts rendered as mono chips under the hero lede. */
   hero_facts: z.array(z.string().min(1)).default([]),
+  /** Availability line shown in the hero side metadata (e.g. "Open to opportunities"). */
+  hero_status: z.string().optional(),
+  /** Focus lines for the hero side metadata block. */
+  hero_focus: z.array(z.string().min(1)).default([]),
 });
 export type ProfileFrontmatter = z.infer<typeof ProfileFrontmatterSchema>;
 

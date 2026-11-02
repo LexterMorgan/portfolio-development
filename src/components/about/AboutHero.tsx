@@ -117,16 +117,6 @@ export function AboutHero({ profile, body }: AboutHeroProps) {
           <MagneticCta>
             <Button
               href="/Michael-Alexander-CV.pdf"
-              external
-              variant="secondary"
-              arrow
-            >
-              View CV
-            </Button>
-          </MagneticCta>
-          <MagneticCta>
-            <Button
-              href="/Michael-Alexander-CV.pdf"
               download="Michael-Alexander-CV.pdf"
               variant="secondary"
             >

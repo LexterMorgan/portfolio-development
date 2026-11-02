@@ -19,6 +19,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-markdown": "^10.1.0",
+    "simple-icons": "^16.36.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {

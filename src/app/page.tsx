@@ -57,10 +57,13 @@ export default function HomePage() {
     <main>
       <HeroSection
         name={profile.data.name}
+        headline={profile.data.headline}
         location={profile.data.location}
         body={heroBody}
         titleLines={profile.data.hero_title_lines}
         facts={profile.data.hero_facts}
+        status={profile.data.hero_status}
+        focus={profile.data.hero_focus}
         links={profile.data.links}
         email={profile.data.email}
       />
@@ -82,7 +85,7 @@ export default function HomePage() {
               index="02"
               label="Selected Work"
               title="Featured Projects"
-              description="Customer risk, market evidence, communication intelligence, and commercial BI — four distinct analytical questions."
+              description="Customer risk, market evidence, communication intelligence, commercial BI, and a personal finance product — five distinct analytical questions."
               meta={`${work.length} projects`}
               align="split"
               action={

@@ -2,6 +2,7 @@ import type { SkillGroup } from "@/content";
 import { getTech } from "@/content";
 import { Reveal } from "@/components/ui/Reveal";
 import { EmptyState } from "@/components/ui/Label";
+import { TechIcon } from "./TechIcon";
 import styles from "./SkillsGrid.module.css";
 
 type SkillsGridProps = {
@@ -26,9 +27,9 @@ export function SkillsGrid({ groups }: SkillsGridProps) {
   return (
     <div className={styles.grid}>
       {visible.map((group, index) => {
-        const labels = group.technologies
-          .map((id) => getTech(id)?.name ?? id)
-          .filter(Boolean);
+        const items = group.technologies
+          .map((id) => ({ id, name: getTech(id)?.name ?? id }))
+          .filter((item) => Boolean(item.name));
 
         return (
           <Reveal
@@ -39,9 +40,10 @@ export function SkillsGrid({ groups }: SkillsGridProps) {
           >
             <p className={styles.label}>{group.label}</p>
             <ul className={styles.list}>
-              {labels.map((name) => (
-                <li key={name} className={styles.item}>
-                  {name}
+              {items.map((item) => (
+                <li key={item.id} className={styles.item}>
+                  <TechIcon id={item.id} />
+                  <span>{item.name}</span>
                 </li>
               ))}
             </ul>

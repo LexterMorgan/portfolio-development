@@ -1,5 +1,32 @@
 ---
 entries:
+  - id: sgs-ai-researcher
+    title: "AI Researcher – Social Media & Content"
+    organization: "SGScholars, Gates Digital Pte Ltd"
+    start: "Sept 2026"
+    end: "Present"
+    layer: additional
+    summary: "Cross-platform social media research and AI-assisted content workflows: identifying topics and formats, preparing posting materials, and supporting campaign setup."
+    highlights:
+      - "Conducted cross-platform research on similar social media accounts and content to identify relevant topics, formats, and ideas for content development."
+      - "Used Muse, DeepSeek, and GPT/Codex across AI-assisted social media workflows to support content research, ideation, and preparation of posting materials."
+      - "Developed content for approximately 14 Facebook and 8 Instagram accounts and managed Facebook groups to support social media activities."
+      - "Collaborated with the marketing team and a developer on AI-generated video content; supported an initiative inviting collaborations for organic videos and portfolio content."
+      - "Handled initial campaign setup and configuration in Meta Ads Manager, and reviewed websites and landing pages to identify and report visible errors to the development team."
+    technologies:
+      - muse
+      - deepseek
+      - gptcodex
+      - metaads
+    practice_groups:
+      - label: Analysis
+        items:
+          - "Cross-platform content research"
+          - "Content ideation"
+      - label: Reporting
+        items:
+          - "Posting materials"
+          - "Website error reporting"
   - id: folu-data-analyst
     title: "Data Analyst"
     organization: "FOLU Net Sink 2030 Project — Biro Hubungan Masyarakat dan Kerja Sama Luar Negeri, Sekretariat Jenderal Kementerian Kehutanan"

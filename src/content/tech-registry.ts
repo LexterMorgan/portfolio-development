@@ -18,6 +18,30 @@ export type TechIconEntry = {
 };
 
 export const TECH_REGISTRY: Record<string, TechIconEntry> = {
+  muse: {
+    id: "muse",
+    name: "Muse",
+    category: "ml",
+    description: "AI-assisted content research",
+  },
+  deepseek: {
+    id: "deepseek",
+    name: "DeepSeek",
+    category: "ml",
+    description: "LLM used in AI-assisted workflows",
+  },
+  gptcodex: {
+    id: "gptcodex",
+    name: "GPT/Codex",
+    category: "ml",
+    description: "OpenAI models for content and code workflows",
+  },
+  metaads: {
+    id: "metaads",
+    name: "Meta Ads Manager",
+    category: "tooling",
+    description: "Campaign setup and configuration",
+  },
   python: {
     id: "python",
     name: "Python",
@@ -132,6 +156,18 @@ export const TECH_REGISTRY: Record<string, TechIconEntry> = {
     name: "Express",
     category: "backend",
     description: "API server",
+  },
+  supabase: {
+    id: "supabase",
+    name: "Supabase",
+    category: "database",
+    description: "Managed Postgres, auth, and row-level security",
+  },
+  fastapi: {
+    id: "fastapi",
+    name: "FastAPI",
+    category: "backend",
+    description: "Python API layer",
   },
   vercel: {
     id: "vercel",

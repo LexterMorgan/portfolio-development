@@ -13,7 +13,7 @@ describe("content loader (repository content)", () => {
     const { getSite, getProfile, getCurrently } = await import("@/content/loader");
     expect(getSite().data.title).toBeTruthy();
     expect(getProfile().data.headline).toContain("Data Science");
-    expect(getProfile().data.hero_title_lines).toHaveLength(2);
+    expect(getProfile().data.hero_title_lines).toHaveLength(3);
     expect(getProfile().data.hero_lede).toBeTruthy();
     expect(getProfile().data.hero_facts).toHaveLength(3);
     expect(getCurrently().data.building).toEqual([]);
@@ -29,13 +29,19 @@ describe("content loader (repository content)", () => {
       "ecommerce-power-shift",
       "folu-executive-intelligence",
       "retailiq",
+      "montara",
+      "trendora",
     ]);
-    expect(getCompletedProjects()).toHaveLength(4);
+    expect(getCompletedProjects()).toHaveLength(5);
     for (const project of projects) {
-      expect(project.data.status).toBe("completed");
-      expect(project.data.featured).toBe(true);
+      expect(project.data.slug).toMatch(/^[a-z0-9-]+$/);
+      expect(project.data.links.github).toMatch(/^https:\/\/github\.com\/LexterMorgan\/.+/);
       expect(project.articleSlugs).toEqual([]);
     }
+    const trendora = projects.find((p) => p.data.slug === "trendora");
+    expect(trendora?.data.status).toBe("in-progress");
+    expect(trendora?.data.featured).toBe(false);
+    expect(trendora?.data.links.live).toBeUndefined();
   });
 
   it("loads updates", async () => {
@@ -48,7 +54,7 @@ describe("content loader (repository content)", () => {
   it("validateAllContent succeeds on repository content", async () => {
     const { validateAllContent } = await import("@/content/loader");
     const result = validateAllContent();
-    expect(result.projects).toBe(4);
+    expect(result.projects).toBe(6);
     expect(result.articles).toBe(0);
   });
 
@@ -58,15 +64,15 @@ describe("content loader (repository content)", () => {
       getBuildingProjects,
       getPublishedArticles,
     } = await import("@/content/loader");
-    expect(getSelectedProjects()).toHaveLength(4);
-    expect(getBuildingProjects().length).toBe(0);
+    expect(getSelectedProjects()).toHaveLength(5);
+    expect(getBuildingProjects().length).toBe(1);
     expect(getPublishedArticles()).toHaveLength(0);
   });
 
   it("maps each completed project to a direct repository URL", async () => {
     const { getCompletedProjects } = await import("@/content/loader");
     const projects = getCompletedProjects();
-    expect(projects).toHaveLength(4);
+    expect(projects).toHaveLength(5);
     for (const project of projects) {
       expect(project.data.links.github).toMatch(
         /^https:\/\/github\.com\/LexterMorgan\/.+/,

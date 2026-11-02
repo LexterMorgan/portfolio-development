@@ -8,6 +8,26 @@
   padding-bottom: clamp(3.5rem, 10vh, 6rem);
 }
 
+/* Frosted plate so hero copy stays legible over the lagoon. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.4) 42%,
+      rgba(255, 255, 255, 0.16) 64%,
+      transparent 82%
+    );
+  border-right: 1.5px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(var(--frost-blur)) saturate(1.3);
+  mask-image: linear-gradient(90deg, #000 0%, #000 58%, transparent 88%);
+}
+
 .inner {
   position: relative;
   z-index: 1;
@@ -33,6 +53,93 @@
 
 .copy {
   max-width: 42rem;
+  position: relative;
+  padding: clamp(1rem, 1.6vw, 1.5rem) clamp(1.2rem, 2vw, 1.8rem);
+  background: var(--frost-bg);
+  border: var(--frost-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(var(--frost-blur)) saturate(1.3);
+  box-shadow: var(--frost-shadow);
+}
+
+/* Halo behind the hero copy, under the text. */
+.inner::before {
+  content: "";
+  position: absolute;
+  left: -2%;
+  top: 4%;
+  width: min(44rem, 82%);
+  height: 78%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 60% 55% at 32% 46%,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0) 70%
+  );
+  filter: blur(30px);
+}
+
+.title {
+  display: grid;
+  gap: 0.04em;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: clamp(3.1rem, 9.6vw, 8rem);
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: var(--tracking-display);
+  margin: 0 0 var(--space-6);
+  color: var(--color-fg);
+}
+
+.line,
+.lineSerif {
+  display: block;
+  white-space: nowrap;
+}
+
+.lineSerif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-accent);
+  text-shadow: 0 0 42px var(--accent-glow);
+}
+
+/* A small editorial step keeps the three-line positioning statement connected. */
+.lineIndent {
+  justify-self: start;
+  margin-left: clamp(1rem, 5vw, 4rem);
+}
+
+/* Lower-right metadata — fills the intentional right-side space */
+.sideMeta {
+  position: absolute;
+  right: 0;
+  bottom: clamp(0.5rem, 6vh, 3rem);
+  display: grid;
+  gap: var(--space-4);
+  text-align: right;
+}
+
+.sideGroup {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.sideLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-fg-subtle);
+}
+
+.sideValue {
+  font-size: var(--text-meta);
+  color: var(--color-fg-muted);
 }
 
 .kicker {
@@ -64,42 +171,19 @@
   color: var(--color-fg);
 }
 
-.title {
-  display: grid;
-  gap: 0.06em;
-  font-family: var(--font-display);
-  font-size: clamp(2.35rem, 6.4vw, 5.15rem);
-  font-weight: 500;
-  line-height: 0.98;
-  letter-spacing: var(--tracking-display);
-  margin: 0 0 var(--space-5);
-  color: var(--color-fg);
-}
-
-.line,
-.lineAccent,
-.amp {
-  display: block;
-  white-space: nowrap;
-}
-
-.lineAccent {
-  color: var(--color-accent);
-}
-
-.amp {
-  color: var(--color-accent);
-  font-size: 0.38em;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  margin-block: 0.12em;
-}
-
 .lede {
   max-width: 36rem;
   color: var(--color-fg-muted);
   font-size: 1.05rem;
   line-height: var(--leading-body);
+  margin: 0 0 var(--space-3);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  letter-spacing: 0.04em;
+  color: var(--color-fg-subtle);
   margin: 0 0 var(--space-5);
 }
 
@@ -117,9 +201,9 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.42rem 0.85rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  background: var(--panel-bg);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.02em;
@@ -146,14 +230,6 @@
   margin-bottom: clamp(3rem, 8vh, 5rem);
 }
 
-.bottom {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
 .socials {
   display: flex;
   flex-wrap: wrap;
@@ -171,27 +247,6 @@
 }
 
 .socials a:hover {
-  color: var(--color-accent);
-}
-
-.scroll {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.4rem;
-  padding: 0.4rem 0.95rem;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-pill);
-  color: var(--color-fg);
-  font-size: var(--text-meta);
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    border-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
-}
-
-.scroll:hover {
-  border-color: var(--color-accent);
   color: var(--color-accent);
 }
 
@@ -225,6 +280,17 @@
   50% { opacity: 0.55; transform: scale(0.86); }
 }
 
+/* Prevent side metadata colliding with the left copy column on laptops */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .copy {
+    max-width: 34rem;
+  }
+
+  .sideMeta {
+    max-width: 13rem;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     min-height: auto;
@@ -233,17 +299,25 @@
   }
 
   .title {
-    font-size: clamp(2.05rem, 10vw, 2.85rem);
+    font-size: clamp(2.6rem, 14vw, 3.4rem);
   }
 
   .line,
-  .lineAccent {
+  .lineSerif {
     white-space: normal;
   }
 
-  .scroll {
-    display: none;
+  .lineIndent {
+    justify-self: start;
+    margin-left: clamp(0.75rem, 8vw, 1.75rem);
   }
+
+  .sideMeta {
+    position: static;
+    margin-top: var(--space-5);
+    text-align: left;
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
